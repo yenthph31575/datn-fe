@@ -43,7 +43,6 @@ const PageCheckout = () => {
   });
   const { items, clearCheckout } = useCheckoutStore();
   const { removeMultipleFromCart } = useCartStore(); // Import removeMultipleFromCart from CartStore
-
   const { mutate: createOrder, isLoading } = useCreateOrderMutation({
     onSuccess: (data) => {
       // Get the IDs of items that were successfully ordered
