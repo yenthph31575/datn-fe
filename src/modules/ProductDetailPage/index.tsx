@@ -3,12 +3,12 @@ import Breadcrumb from '@/components/Breadcrumb';
 import H2 from '@/components/text/H2';
 import H3 from '@/components/text/H3';
 import Container from '@/components/wrapper/Container';
+import { ROUTER } from '@/libs/router';
 import React from 'react';
 import ProductComment from './components/ProductComment';
 import ProductDetail from './components/ProductDetail';
 import ProductInfo from './components/ProductInfo';
 import ProductRelated from './components/ProductRelated';
-import { ROUTER } from '@/libs/router';
 
 type Props = {
   params: Promise<{
@@ -19,7 +19,6 @@ type Props = {
 const ProductDetailPage = async ({ params }: Props) => {
   const slug = (await params).slug;
   const data = await getProductByIdOrSlug(slug);
-
   return (
     <div>
       <Breadcrumb
