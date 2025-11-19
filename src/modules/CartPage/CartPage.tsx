@@ -27,7 +27,6 @@ const CartPageWebsite = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
   const router = useRouter();
-
   // Fetch cart from API if user is logged in
   const { data: cartData, isFetching: isCartLoading } = useCartQuery({
     enabled: !!user?.id,
