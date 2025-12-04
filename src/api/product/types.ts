@@ -27,7 +27,6 @@ export interface IBrandInfo {
   name: string;
   slug: string;
 }
-
 export interface IProduct {
   _id: string;
   name: string;

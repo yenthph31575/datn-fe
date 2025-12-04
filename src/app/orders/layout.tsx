@@ -9,7 +9,6 @@ import React, { useEffect } from 'react';
 const OrdersLayout: FCC = ({ children }) => {
   const { isLoggedIn, isFetching } = useUserLogin();
   const router = useRouter();
-
   useEffect(() => {
     if (!isLoggedIn && !isFetching) router.replace(ROUTER.SIGN_IN);
   }, [isLoggedIn, isFetching]);

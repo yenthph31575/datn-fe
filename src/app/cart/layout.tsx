@@ -17,5 +17,4 @@ const layout: FCC = ({ children }) => {
   // if (!isLoggedIn && !isFetching) return <></>;
   return <MainLayout>{children}</MainLayout>;
 };
-
 export default layout;

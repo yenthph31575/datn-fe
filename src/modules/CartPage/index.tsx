@@ -114,7 +114,7 @@ const CartPage = () => {
 
   return (
     <div className="bg-[#F5F5F5] pb-10">
-      <Breadcrumb breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Giỏ hàng' }]} className="bg-white" />
+      <Breadcrumb breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'Cart' }]} className="bg-white" />
 
       <Container className="mt-8 text-sm">
         <H3>Giỏ hàng</H3>
