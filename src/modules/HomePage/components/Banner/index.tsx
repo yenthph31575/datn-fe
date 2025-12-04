@@ -1,6 +1,7 @@
 'use client';
 
 import { HStack } from '@/components/utilities';
+import Container from '@/components/wrapper/Container';
 import Image from 'next/image';
 import React from 'react';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
@@ -16,27 +17,29 @@ const Banner = () => {
     },
   ];
   return (
-    <div>
-      <Swiper
-        // install Swiper modules
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop={true}
-        onSlideChange={() => console.log('slide change')}
-      >
-        {sliders?.map((item, index) => (
-          <SwiperSlide key={index}>
-            <HStack pos="center">
-              <Image src={item.image || ''} alt="" className="w-full rounded-lg" width={1200} height={465} />
-            </HStack>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="mt-8">
+      <Container>
+        <Swiper
+          // install Swiper modules
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true}
+          onSlideChange={() => console.log('slide change')}
+        >
+          {sliders?.map((item, index) => (
+            <SwiperSlide key={index}>
+              <HStack pos="center">
+                <Image src={item.image || ''} alt="" className="w-full rounded-lg" width={1200} height={465} />
+              </HStack>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
     </div>
   );
 };

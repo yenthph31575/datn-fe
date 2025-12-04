@@ -27,7 +27,7 @@ const VouchersPage = () => {
 
       <Container className="py-8">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <H2>Available Vouchers</H2>
+          <H2>Khuyến mãi</H2>
           {/* <div className="mt-4 w-full sm:mt-0 sm:w-64">
             <SearchInput placeholder="Search vouchers..." onSearch={handleSearch} value={searchKeyword} loading={isFetching} />
           </div> */}
@@ -43,8 +43,8 @@ const VouchersPage = () => {
 
         <Show when={!isFetching && (!data || data?.length === 0)}>
           <NoDataAvailable
-            title="No vouchers available"
-            description="There are no active vouchers available at the moment."
+            title="Không có voucher"
+            description="Không có voucher nào"
             icon={<Ticket className="h-16 w-16 text-gray-400" />}
             action={
               <Link href={ROUTER.COLLECTIONS}>

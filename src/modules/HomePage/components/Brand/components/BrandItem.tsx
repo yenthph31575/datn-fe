@@ -13,8 +13,8 @@ type Props = {
 } & Partial<IBrand>;
 const BrandItem = ({ loading, name, slug, _id, logo }: Props) => {
   return (
-    <Link href={`${ROUTER.COLLECTIONS}?brand=${_id}`} className="group h-full">
-      <div className="relative flex h-full w-full overflow-hidden rounded-lg border">
+    <Link href={`${ROUTER.COLLECTIONS}?brand=${_id}`} className="group h-full transition-all duration-300 hover:-translate-y-1">
+      <div className="relative flex h-full w-full overflow-hidden rounded-lg border transition-all duration-300 group-hover:border-primary-500 group-hover:shadow-lg">
         <Image
           src={logo || ''}
           alt=""

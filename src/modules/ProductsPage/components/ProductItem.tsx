@@ -35,7 +35,7 @@ const ProductItem = ({
   const _originalPrice = originalPrice ? originalPrice : Number(currentPrice) + 10000;
   return (
     <Link href={`${ROUTER.PRODUCTS}/${slug}`}>
-      <VStack className="group relative h-full rounded-lg border p-4">
+      <VStack className="group relative h-full rounded-lg border p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary-500 hover:shadow-lg">
         <SkeletonWrapper loading={loading}>
           <div className="flex-1 overflow-hidden">
             <Image

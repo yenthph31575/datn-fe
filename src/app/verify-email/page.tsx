@@ -19,12 +19,12 @@ export default function VerifyEmailPage() {
     mutationFn: (token: string) => verifyEmail(token),
     onSuccess: () => {
       setVerificationStatus('success');
-      toast.success('Email verified successfully!');
+      toast.success('Email xác minh thành công!');
     },
     onError: (error) => {
       console.error('Email verification error:', error);
       setVerificationStatus('error');
-      toast.error('Failed to verify email. The link may be expired or invalid.');
+      toast.error('Xác minh email thất bại. Liên kết có thể đã hết hạn hoặc không hợp lệ.');
     },
   });
 
@@ -39,7 +39,7 @@ export default function VerifyEmailPage() {
   return (
     <VStack className="min-h-screen bg-gray-50 p-4" spacing={16}>
       <VStack className="mx-auto mt-20 max-w-md rounded-lg bg-white p-8 shadow-md" spacing={16}>
-        <h1 className="text-center font-bold text-2xl text-primary-600">Email Verification</h1>
+        <h1 className="text-center font-bold text-2xl text-primary-600">Xác minh email</h1>
 
         {verificationStatus === 'loading' && (
           <VStack spacing={8} className="items-center">
@@ -61,7 +61,7 @@ export default function VerifyEmailPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <p className="text-center text-gray-600">Your email has been successfully verified!</p>
+            <p className="text-center text-gray-600">Email của bạn đã được xác minh thành công!</p>
           </VStack>
         )}
 
@@ -79,17 +79,17 @@ export default function VerifyEmailPage() {
               </svg>
             </div>
             <p className="text-center text-gray-600">
-              {!token ? 'No verification token provided.' : 'Failed to verify your email. The link may be expired or invalid.'}
+              {!token ? 'Không cung cấp token xác minh.' : 'Xác minh email thất bại. Liên kết có thể đã hết hạn hoặc không hợp lệ.'}
             </p>
           </VStack>
         )}
 
         <HStack pos="center" spacing={8}>
           <Button onClick={() => router.push(ROUTER.SIGN_IN)} variant="default">
-            Go to Login
+            Đăng nhập
           </Button>
           <Button onClick={() => router.push(ROUTER.HOME)} variant="outline">
-            Go to Home
+            Trang chủ
           </Button>
         </HStack>
       </VStack>

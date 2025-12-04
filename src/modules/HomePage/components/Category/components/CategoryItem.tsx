@@ -13,8 +13,8 @@ type Props = {
 } & Partial<ICategory>;
 const CategoryItem = ({ loading, _id, name, slug, image }: Props) => {
   return (
-    <Link href={`${ROUTER.COLLECTIONS}?category=${_id}`} className="group flex flex-col">
-      <div className="relative flex h-full w-full overflow-hidden rounded-lg border">
+    <Link href={`${ROUTER.COLLECTIONS}?category=${_id}`} className="group flex flex-col transition-all duration-300 hover:-translate-y-1">
+      <div className="relative flex h-full w-full overflow-hidden rounded-lg border transition-all duration-300 group-hover:border-primary-500 group-hover:shadow-lg">
         <Image
           src={image || ''}
           alt=""

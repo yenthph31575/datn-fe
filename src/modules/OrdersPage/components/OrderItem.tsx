@@ -69,7 +69,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
             </span>
 
             <Button variant="ghost" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="hover:bg-gray-100">
-              {isExpanded ? 'Hide Details' : 'View Details'}
+              {isExpanded ? 'Ẩn' : 'Xem chi tiết'}
             </Button>
           </HStack>
         </HStack>
@@ -97,7 +97,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
                 size="sm"
                 className="w-full border-primary-200 text-primary-700 hover:bg-primary-50 hover:text-primary-800"
               >
-                View Order
+                Xem đơn hàng
               </Button>
             </Link>
             {order.shippingStatus === 'PENDING' && order.paymentStatus === 'PENDING' && order.paymentMethod === 'CASH_ON_DELIVERY' && (

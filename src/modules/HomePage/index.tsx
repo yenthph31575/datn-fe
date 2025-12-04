@@ -12,23 +12,30 @@ import ProductBestSeller from './components/ProductBestSeller';
 
 const HomePage = () => {
   return (
-    <Container className="mt-10">
-      <VStack spacing={48}>
-        <Banner />
+    <main
+      className="flex flex-col gap-12 pb-10"
+      style={{
+        backgroundImage: 'url(https://mykingdom.com.vn/cdn/shop/files/12._Background_trang_ch_-_1440x1080_2.webp?v=1764305251)',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+      }}
+    >
+      <Banner />
 
-        <Category />
+      <Category />
 
-        <NewArrivals />
+      <NewArrivals />
 
-        <ProductBestSeller />
+      <ProductBestSeller />
 
-        <AvailableVouchers />
+      <AvailableVouchers />
 
-        <Brand />
+      <Brand />
 
-        <FeaturedProducts />
-      </VStack>
-    </Container>
+      <FeaturedProducts />
+    </main>
   );
 };
 
