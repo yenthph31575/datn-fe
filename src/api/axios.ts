@@ -69,6 +69,8 @@ request.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   const accessToken = getCookie('access_token');
 
   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+  config.headers['ngrok-skip-browser-warning'] = true;
+
   return config;
 });
 
