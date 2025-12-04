@@ -37,8 +37,9 @@ const TopBar = () => {
           {/* Left side - Animated Promotion */}
           <div className="hidden overflow-hidden md:block">
             <div
-              className={`flex items-center transition-all duration-500 ${isVisible ? 'transform-none opacity-100' : '-translate-y-4 opacity-0'
-                }`}
+              className={`flex items-center transition-all duration-500 ${
+                isVisible ? 'transform-none opacity-100' : '-translate-y-4 opacity-0'
+              }`}
             >
               <div className="mr-2 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-primary-600">
                 {promos[currentPromo].icon}

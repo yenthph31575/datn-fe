@@ -24,7 +24,6 @@ const SummaryOrder = () => {
   const { mutate: verifyVoucher, isLoading: isVerifying } = useVerifyVoucherMutation({
     onSuccess: (data) => {
       if (data.valid && data.voucher) {
-
         //// Cập nhật thông tin giảm giá (số tiền + mã voucher) vào store thanh toán
         setDiscount(Number(data.discountAmount));
 

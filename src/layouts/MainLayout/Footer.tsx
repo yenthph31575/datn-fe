@@ -15,9 +15,7 @@ const Footer = () => {
             <Link href={ROUTER.HOME}>
               <Image src="/images/logo.png" alt="logo" width={150} height={92} priority />
             </Link>
-            <p className="mt-4 text-gray-600 text-sm">
-              Nền tảng mua sắm trực tuyến uy tín với sản phẩm chất lượng và dịch vụ tận tâm.
-            </p>
+            <p className="mt-4 text-gray-600 text-sm">Nền tảng mua sắm trực tuyến uy tín với sản phẩm chất lượng và dịch vụ tận tâm.</p>
             <HStack className="mt-6" spacing={16}>
               <Link href="#" aria-label="Facebook">
                 <Facebook className="h-5 w-5 text-gray-600 hover:text-primary-600" />
@@ -92,9 +90,7 @@ const Footer = () => {
 
         <div className="mt-12 border-gray-300 border-t pt-6">
           <div className="flex flex-col items-center justify-between md:flex-row">
-            <p className="text-gray-600 text-sm">
-              © {new Date().getFullYear()} Tên Công Ty Của Bạn. Mọi quyền được bảo lưu.
-            </p>
+            <p className="text-gray-600 text-sm">© {new Date().getFullYear()} Tên Công Ty Của Bạn. Mọi quyền được bảo lưu.</p>
             <div className="mt-4 md:mt-0">
               <HStack spacing={16}>
                 <Link href="/terms" className="text-gray-600 text-sm hover:text-primary-600">

@@ -47,7 +47,6 @@ const CheckoutPage = () => {
 
   const { mutate: createOrder, isLoading } = useCreateOrderMutation({
     onSuccess: (data) => {
-
       // Lấy danh sách ID của các sản phẩm đã đặt hàng thành công
       const orderedItemIds = items.map((item) => item._id).filter(Boolean);
 
