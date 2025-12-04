@@ -79,7 +79,7 @@ const OrderSummary = () => {
         )}
         <Separator />
         <div className="flex justify-between font-bold">
-          <span>Total</span>
+          <span>Tổng đơn hàng</span>
           <span>{formatNumber(total)}</span>
         </div>
       </div>

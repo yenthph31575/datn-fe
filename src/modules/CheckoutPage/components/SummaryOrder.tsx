@@ -20,14 +20,15 @@ const SummaryOrder = () => {
 
   const { data: vouchers } = useVouchersQuery({ variables: { limit: 1000 } });
 
-  // Use verify voucher mutation
+  // Hàm kiểm tra voucher hợp lệ
   const { mutate: verifyVoucher, isLoading: isVerifying } = useVerifyVoucherMutation({
     onSuccess: (data) => {
       if (data.valid && data.voucher) {
-        // Set the discount and voucher ID in the checkout store
+
+        //// Cập nhật thông tin giảm giá (số tiền + mã voucher) vào store thanh toán
         setDiscount(Number(data.discountAmount));
 
-        // Set the voucher ID in the form
+        // // Gán ID voucher vào form
         form.setValue('voucherId', data.voucher._id);
 
         toast.success(`Voucher ${data.voucher.code} applied successfully!`);
@@ -51,7 +52,7 @@ const SummaryOrder = () => {
 
     setIsApplyingCoupon(true);
 
-    // Call the verify voucher API
+    // Gọi API để xác thực mã giảm giá
     verifyVoucher({
       code: couponCode.trim(),
       orderAmount: subtotal,
