@@ -24,7 +24,9 @@ const OrderSummary = () => {
   const { mutate: verifyVoucher, isLoading: isVerifying } = useVerifyVoucherMutation({
     onSuccess: (data) => {
       if (data.valid && data.voucher) {
+
         // cập nhật giảm giá vào đơn hàng
+
         setDiscount(Number(data.discountAmount));
 
         // câp nhật voucherId vào form
