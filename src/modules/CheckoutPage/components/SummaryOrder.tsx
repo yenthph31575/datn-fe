@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const SummaryOrder = () => {
+const OrderSummary = () => {
   const form = useFormContext();
   const { subtotal, shippingFee, discount, total, setDiscount } = useCheckoutStore();
   const [couponCode, setCouponCode] = useState('');
@@ -20,38 +20,40 @@ const SummaryOrder = () => {
 
   const { data: vouchers } = useVouchersQuery({ variables: { limit: 1000 } });
 
-  // Hàm kiểm tra voucher hợp lệ
+  // sử dụng mutation để xác thực voucher
   const { mutate: verifyVoucher, isLoading: isVerifying } = useVerifyVoucherMutation({
     onSuccess: (data) => {
       if (data.valid && data.voucher) {
-        //// Cập nhật thông tin giảm giá (số tiền + mã voucher) vào store thanh toán
+
+        // cập nhật giảm giá vào đơn hàng
+
         setDiscount(Number(data.discountAmount));
 
-        // // Gán ID voucher vào form
+        // câp nhật voucherId vào form
         form.setValue('voucherId', data.voucher._id);
 
-        toast.success(`Voucher ${data.voucher.code} applied successfully!`);
+        toast.success(`Voucher ${data.voucher.code} đã được áp dụng!`);
       } else {
-        toast.error('Invalid or expired voucher code');
+        toast.error('Mã voucher không hợp lệ hoặc không đủ điều kiện áp dụng.');
       }
       setIsApplyingCoupon(false);
     },
     onError: (error) => {
-      toast.error('Failed to verify voucher. Please try again.');
-      console.error('Voucher verification error:', error);
+      toast.error('Không thể xác thực voucher. Vui lòng thử lại sau.');
+      console.error('Lỗi xác thực voucher:', error);
       setIsApplyingCoupon(false);
     },
   });
 
   const handleApplyCoupon = () => {
     if (!couponCode.trim()) {
-      toast.error('Please enter a voucher code');
+      toast.error('Vui lòng nhập mã voucher hợp lệ.');
       return;
     }
 
     setIsApplyingCoupon(true);
 
-    // Gọi API để xác thực mã giảm giá
+    // gọi API để xác thực voucher
     verifyVoucher({
       code: couponCode.trim(),
       orderAmount: subtotal,
@@ -79,13 +81,13 @@ const SummaryOrder = () => {
         )}
         <Separator />
         <div className="flex justify-between font-bold">
-          <span>Total</span>
+          <span>Tổng đơn hàng</span>
           <span>{formatNumber(total)}</span>
         </div>
       </div>
 
       <VStack spacing={12} className="mb-6">
-        <Input placeholder="Enter voucher code" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} className="flex-1" />
+        <Input placeholder="Nhập mã voucher" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} className="flex-1" />
 
         <SelectCustom
           className="rounded border"
@@ -109,4 +111,4 @@ const SummaryOrder = () => {
   );
 };
 
-export default SummaryOrder;
+export default OrderSummary;

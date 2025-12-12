@@ -150,6 +150,7 @@ const CartPageWebsite = () => {
                   <div className="grid grid-cols-[2.5fr_1fr_1fr_1fr_1fr] py-4">
                     <HStack align="start" spacing={12}>
                       <Checkbox checked={selectedItems.includes(cart._id || '')} onCheckedChange={() => handleSelectItem(cart._id || '')} />
+
                       <VStack>
                         <p className="line-clamp-2">{cart.name}</p>
 

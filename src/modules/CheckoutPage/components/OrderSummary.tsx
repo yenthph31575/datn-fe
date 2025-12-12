@@ -20,38 +20,38 @@ const OrderSummary = () => {
 
   const { data: vouchers } = useVouchersQuery({ variables: { limit: 1000 } });
 
-  // Use verify voucher mutation
+  // sử dụng mutation để xác thực voucher
   const { mutate: verifyVoucher, isLoading: isVerifying } = useVerifyVoucherMutation({
     onSuccess: (data) => {
       if (data.valid && data.voucher) {
-        // Set the discount and voucher ID in the checkout store
+        // cập nhật giảm giá vào đơn hàng
         setDiscount(Number(data.discountAmount));
 
-        // Set the voucher ID in the form
+        // câp nhật voucherId vào form
         form.setValue('voucherId', data.voucher._id);
 
-        toast.success(`Voucher ${data.voucher.code} applied successfully!`);
+        toast.success(`Voucher ${data.voucher.code} đã được áp dụng!`);
       } else {
-        toast.error('Invalid or expired voucher code');
+        toast.error('Mã voucher không hợp lệ hoặc không đủ điều kiện áp dụng.');
       }
       setIsApplyingCoupon(false);
     },
     onError: (error) => {
-      toast.error('Failed to verify voucher. Please try again.');
-      console.error('Voucher verification error:', error);
+      toast.error('Không thể xác thực voucher. Vui lòng thử lại sau.');
+      console.error('Lỗi xác thực voucher:', error);
       setIsApplyingCoupon(false);
     },
   });
 
   const handleApplyCoupon = () => {
     if (!couponCode.trim()) {
-      toast.error('Please enter a voucher code');
+      toast.error('Vui lòng nhập mã voucher hợp lệ.');
       return;
     }
 
     setIsApplyingCoupon(true);
 
-    // Call the verify voucher API
+    // gọi API để xác thực voucher
     verifyVoucher({
       code: couponCode.trim(),
       orderAmount: subtotal,
@@ -85,7 +85,7 @@ const OrderSummary = () => {
       </div>
 
       <VStack spacing={12} className="mb-6">
-        <Input placeholder="Enter voucher code" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} className="flex-1" />
+        <Input placeholder="Nhập mã voucher" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} className="flex-1" />
 
         <SelectCustom
           className="rounded border"
