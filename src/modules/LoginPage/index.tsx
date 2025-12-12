@@ -47,7 +47,7 @@ const LoginPage = () => {
             });
             setUser(user);
             router.replace(ROUTER.HOME);
-            toast.success('You have logged in successfully!');
+            toast.success('Bạn đã đăng nhập thành công!');
           },
           onError: onMutateError,
         }
@@ -64,7 +64,7 @@ const LoginPage = () => {
         });
         setUser(user);
         router.replace(ROUTER.HOME);
-        toast.success('You have logged in successfully!');
+        toast.success('Bạn đã đăng nhập thành công!');
       },
       onError: onMutateError,
     });
