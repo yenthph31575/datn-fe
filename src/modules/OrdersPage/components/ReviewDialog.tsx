@@ -76,7 +76,7 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
     }
   );
 
-  // Submit review mutation using the actual API
+  // Gửi đánh giá bằng mutation sử dụng API thực tế
   const { mutate: submitReview, isLoading: isSubmitting } = useSubmitReviewMutation({
     onSuccess: () => {
       toast.success('Cảm ơn bạn đã đánh giá sản phẩm!');
@@ -89,7 +89,7 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
   });
 
   const handleSubmit = (values: ReviewFormValues) => {
-    // Prepare the data according to the API requirements
+    // Chuẩn bị dữ liệu theo yêu cầu của API
     const reviewData = {
       productId: values.productId,
       orderId: values.orderId,
@@ -121,7 +121,7 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button size="xs">Reviews</Button>
+        <Button size="xs">Đánh giá</Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[500px]">
@@ -144,7 +144,7 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
               </div>
               <div>
                 <h4 className="font-medium">{productName}</h4>
-                <p className="text-gray-500 text-sm">Order Code: {orderId.slice(-6)}</p>
+                <p className="text-gray-500 text-sm">Mã đơn hàng: {orderId.slice(-6)}</p>
               </div>
             </HStack>
 
@@ -154,7 +154,7 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
               name="rating"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Rating</FormLabel>
+                  <FormLabel>Đánh giá</FormLabel>
                   <FormControl>
                     <Rating value={field.value} onChange={field.onChange} readOnly={false} size="lg" className="justify-start" />
                   </FormControl>
@@ -189,8 +189,8 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
                 multiple
                 types={['JPG', 'PNG', 'JPEG']}
                 handleChange={handleFileChange}
-                onSizeError={() => toast.error('Image size must be less than 5MB')}
-                onTypeError={() => toast.error('Only JPG, PNG and JPEG files are allowed')}
+                onSizeError={() => toast.error('Kích thước hình ảnh phải nhỏ hơn 5MB')}
+                onTypeError={() => toast.error('Chỉ hỗ trợ định dạng JPG, PNG và JPEG')}
               >
                 <div className="cursor-pointer rounded-md border-2 border-gray-300 border-dashed p-4 text-center hover:border-gray-400">
                   {/* <Icons.image className="mx-auto h-8 w-8 text-gray-400" /> */}
@@ -220,7 +220,7 @@ const ReviewDialog = ({ productId, orderId, productImage, productName, refetch }
               <Show when={isUploading}>
                 <div className="mt-2 flex items-center gap-2">
                   <Icons.spinner className="h-4 w-4 animate-spin" />
-                  <span className="text-gray-500 text-sm">Uploading image...</span>
+                  <span className="text-gray-500 text-sm">Đang tải ảnh lên...</span>
                 </div>
               </Show>
             </div>
