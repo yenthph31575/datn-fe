@@ -164,7 +164,7 @@ const ShippingForm = () => {
                 <TextField label="Phường/Xã" placeholder="Nhập Phường/Xã" control={form.control} name="ward" required />
                 <TextField label="Postal Code" placeholder="Mời nhập postal code" control={form.control} name="postalCode" />
 
-                <CheckboxField label="Set as default address" control={form.control} name="isDefault" />
+                <CheckboxField label="Đặt làm địa chỉ mặc định" control={form.control} name="isDefault" />
 
                 <div className="flex justify-end gap-2 md:col-span-2">
                   <Button type="button" variant="outline" onClick={() => setIsAddingAddress(false)}>
@@ -199,9 +199,8 @@ const ShippingForm = () => {
               ?.map((address) => (
                 <div
                   key={address._id}
-                  className={`relative rounded-md border p-3 transition-all ${
-                    selectedAddressId === address._id ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
-                  }`}
+                  className={`relative rounded-md border p-3 transition-all ${selectedAddressId === address._id ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+                    }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-3">
@@ -212,7 +211,7 @@ const ShippingForm = () => {
                             {address.fullName}
                           </label>
                           {address.isDefault && (
-                            <span className="rounded-full bg-primary-100 px-2 py-0.5 text-primary-700 text-xs">Default</span>
+                            <span className="rounded-full bg-primary-100 px-2 py-0.5 text-primary-700 text-xs">Mặc định</span>
                           )}
                         </div>
                         <p className="mt-1 text-gray-600 text-sm">{address.phone}</p>
