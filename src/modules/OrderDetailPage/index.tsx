@@ -34,36 +34,36 @@ const OrderDetailPage = () => {
     onError: onMutateError,
   });
 
-  // Simplified status display function
+
   const getStatusBadge = () => {
     if (!order) return null;
 
-    // Check if order is fully completed (delivered and paid)
+    // Kiểm tra xem đơn hàng đã hoàn tất hay chưa (đã giao hàng và đã thanh toán)
     if (order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED') {
       return (
         <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-green-100 text-green-800')}>
           <CheckCircle className="h-5 w-5" />
-          Completed
+          Hoàn tấttất
         </span>
       );
     }
 
-    // Status config based on shipping status
+    // Cấu hình trạng thái dựa trên trạng thái giao hàng
     const statusConfig = {
       PENDING: {
         color: 'bg-yellow-100 text-yellow-800',
         icon: <AlertCircle className="h-5 w-5" />,
-        text: 'Pending',
+        text: 'Chờ xử lý',
       },
       PROCESSING: {
         color: 'bg-blue-100 text-blue-800',
         icon: <Package className="h-5 w-5" />,
-        text: 'Processing',
+        text: 'Đang xử lý',
       },
       SHIPPED: {
         color: 'bg-blue-100 text-blue-800',
         icon: <Truck className="h-5 w-5" />,
-        text: 'Shipping',
+        text: 'Đang vận chuyển',
       },
       CANCELED: {
         color: 'bg-red-100 text-red-800',
@@ -72,17 +72,17 @@ const OrderDetailPage = () => {
       },
     };
 
-    // If payment failed, show that first
+    // Nếu thanh toán thất bại, hiển thị trạng thái này trước
     if (order.paymentStatus === 'FAILED') {
       return (
         <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-red-100 text-red-800')}>
           <AlertCircle className="h-5 w-5" />
-          Payment Failed
+          Thanh toán thất bại
         </span>
       );
     }
 
-    // Otherwise show shipping status
+    // Nếu không, hiển thị trạng thái vận chuyển
     const config = (statusConfig as any)[order.shippingStatus] || statusConfig.PENDING;
 
     return (
@@ -97,12 +97,12 @@ const OrderDetailPage = () => {
     return (
       <Container className="py-16">
         <div className="text-center">
-          <h2 className="font-semibold text-gray-900 text-xl">Order not found</h2>
-          <p className="mt-2 text-gray-600">The order you're looking for doesn't exist or you don't have permission to view it.</p>
+          <h2 className="font-semibold text-gray-900 text-xl">Không tìm thấy đơn hàng</h2>
+          <p className="mt-2 text-gray-600">Đơn hàng không tồn tại hoặc bạn không có quyền truy cập.</p>
           <Link href={ROUTER.ORDERS}>
             <Button className="mt-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Orders
+              Quay lại đơn hàng
             </Button>
           </Link>
         </div>
@@ -121,7 +121,7 @@ const OrderDetailPage = () => {
       }
       return format(date, 'dd/MM/yyyy');
     } catch (error) {
-      console.error('Error formatting date:', error);
+      console.error('Lỗi khi định dạng ngày:', error);
       return 'N/A';
     }
   };
@@ -137,7 +137,7 @@ const OrderDetailPage = () => {
       }
       return format(date, 'dd/MM/yyyy HH:mm');
     } catch (error) {
-      console.error('Error formatting date time:', error);
+      console.error('Lỗi khi định dạng ngày giờ:', error);
       return 'N/A';
     }
   };
@@ -146,9 +146,9 @@ const OrderDetailPage = () => {
     <div>
       <Breadcrumb
         breadcrumbs={[
-          { name: 'Home', path: ROUTER.HOME },
-          { name: 'My Orders', path: ROUTER.ORDERS },
-          { name: order ? `Order Code: ${order.orderCode}` : 'Order Details' },
+          { name: 'Trang chủchủ', path: ROUTER.HOME },
+          { name: 'Đơn hàng của tôi', path: ROUTER.ORDERS },
+          { name: order ? `Mã đơn hàng: ${order.orderCode}` : 'Chi tiết đơn hàng' },
         ]}
       />
 
@@ -178,7 +178,7 @@ const OrderDetailPage = () => {
             <div className="border-gray-200 border-b p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <H2 className="mb-1">Order Code: {order?.orderCode}</H2>
+                  <H2 className="mb-1">Mã đơn hàng {order?.orderCode}</H2>
                   <p className="text-gray-500 text-sm">Đã đặt: {formatDate(order?.createdAt)}</p>
                 </div>
                 <div className="flex items-center gap-4">{getStatusBadge()}</div>
@@ -208,9 +208,9 @@ const OrderDetailPage = () => {
                         </div>
                         <div className="flex flex-1 flex-col">
                           <h4 className="font-medium text-gray-900 text-sm">{item.productName}</h4>
-                          {item.variantId && <p className="mt-1 text-gray-500 text-xs">Variant: {item.variantId}</p>}
+                          {item.variantId && <p className="mt-1 text-gray-500 text-xs">Phân loại {item.variantId}</p>}
                           <div className="mt-auto flex items-end justify-between">
-                            <p className="text-gray-500 text-sm">Qty: {item.quantity}</p>
+                            <p className="text-gray-500 text-sm">Số lượng {item.quantity}</p>
                             <p className="font-medium text-gray-900 text-sm">{formatNumber(item.price * item.quantity)} vnđ</p>
                           </div>
                         </div>
@@ -283,7 +283,7 @@ const OrderDetailPage = () => {
                         <div className="mt-2 rounded-md bg-red-50 p-2">
                           <p className="flex items-center font-medium text-red-600 text-sm">
                             <X className="mr-2 h-4 w-4" />
-                            Payment Failed
+                            Thanh toán thất bạibại
                           </p>
                         </div>
                       ) : (
