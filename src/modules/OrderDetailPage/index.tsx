@@ -43,7 +43,7 @@ const OrderDetailPage = () => {
       return (
         <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-green-100 text-green-800')}>
           <CheckCircle className="h-5 w-5" />
-          Hoàn tấttất
+          Hoàn tất
         </span>
       );
     }
@@ -146,7 +146,7 @@ const OrderDetailPage = () => {
     <div>
       <Breadcrumb
         breadcrumbs={[
-          { name: 'Trang chủchủ', path: ROUTER.HOME },
+          { name: 'Trang chủ', path: ROUTER.HOME },
           { name: 'Đơn hàng của tôi', path: ROUTER.ORDERS },
           { name: order ? `Mã đơn hàng: ${order.orderCode}` : 'Chi tiết đơn hàng' },
         ]}
