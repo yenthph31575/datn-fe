@@ -159,7 +159,7 @@ const Introduce = ({
             min={1}
             max={selectedVariant?.quantity ?? totalQuantity}
           />
-          <span className="text-primary-600 text-xs">{formatNumber(selectedVariant?.quantity ?? totalQuantity)} products available</span>
+          <span className="text-primary-600 text-xs">{formatNumber(selectedVariant?.quantity ?? totalQuantity)} Sản phẩm có sẵn</span>
         </div>
         <Button variant="shadow" className="h-11" disabled={!selectedVariant} onClick={handleAddToCart}>
           <Icons.cart className="mr-2" />
