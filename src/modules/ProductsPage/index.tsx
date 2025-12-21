@@ -33,7 +33,7 @@ const ProductPage = () => {
 
   return (
     <section>
-      <Breadcrumb breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'Collection' }]} />
+      <Breadcrumb breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Bộ sưu tập' }]} />
 
       <Container className="mt-10">
         <div className=" flex">
