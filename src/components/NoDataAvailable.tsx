@@ -18,7 +18,7 @@ const NoDataAvailable = ({ message, title, description, icon, action }: Props) =
 
       {title && <h3 className="font-semibold text-gray-800 text-xl">{title}</h3>}
 
-      <span className="max-w-md text-center font-medium text-gray-500 text-sm">{message || description || 'No data available!'}</span>
+      <span className="max-w-md text-center font-medium text-gray-500 text-sm">{message || description || 'Không có dữ liệu!'}</span>
 
       {action && <div className="mt-4">{action}</div>}
     </VStack>
