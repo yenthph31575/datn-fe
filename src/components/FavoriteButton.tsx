@@ -50,7 +50,7 @@ const FavoriteButton = ({
 
   const handleToggleFavorite = () => {
     if (!isLoggedIn || !productId) {
-      toast.info('Please login to add items to favorites');
+      toast.info('Vui lòng đăng nhập để sử dụng tính năng này!');
       router.push(ROUTER.SIGN_IN);
       return;
     }
@@ -76,7 +76,7 @@ const FavoriteButton = ({
           isFavorite ? 'fill-current' : 'fill-none group-hover:fill-current group-hover:text-red-500'
         )}
       />
-      {showText && <span className="ml-2">{isFavorite ? 'Saved' : 'Save'}</span>}
+      {showText && <span className="ml-2">{isFavorite ? 'Đã lưu' : 'Lưu'}</span>}
     </Button>
   );
 };
