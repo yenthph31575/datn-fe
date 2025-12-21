@@ -1,7 +1,7 @@
 const VoucherSkeleton = () => {
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-      {/* Voucher header skeleton */}
+      {/* skeleton phần đầu voucher */}
       <div className="relative bg-gray-200 p-4">
         <div className="flex items-center justify-between">
           <div className="h-6 w-32 animate-pulse rounded bg-gray-300"></div>
@@ -9,7 +9,7 @@ const VoucherSkeleton = () => {
         </div>
         <div className="mt-1 h-4 w-48 animate-pulse rounded bg-gray-300"></div>
 
-        {/* Tear effect */}
+        {/* Hiệu ứng xé vé */}
         <div className="absolute right-0 bottom-0 left-0 h-4 overflow-hidden">
           <div className="flex w-full">
             {Array.from({ length: 20 }).map((_, i) => (
@@ -19,7 +19,7 @@ const VoucherSkeleton = () => {
         </div>
       </div>
 
-      {/* Voucher content skeleton */}
+      {/* skeleton phần nội dung voucher */}
       <div className="p-4">
         <div className="mb-4 flex items-center justify-between">
           <div className="h-8 w-20 animate-pulse rounded bg-gray-200"></div>
@@ -35,13 +35,13 @@ const VoucherSkeleton = () => {
           ))}
         </div>
 
-        {/* Voucher code skeleton */}
+        {/* phần mã voucher */}
         <div className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2">
           <div className="h-6 w-32 animate-pulse rounded bg-gray-200"></div>
           <div className="h-8 w-8 animate-pulse rounded bg-gray-200"></div>
         </div>
 
-        {/* Button skeleton */}
+        {/* skeleton nút bấmbấm */}
         <div className="h-10 w-full animate-pulse rounded bg-gray-200"></div>
       </div>
     </div>
