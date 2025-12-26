@@ -110,7 +110,7 @@ const FilterLeftBar = ({ onChange }: Props) => {
   return (
     <VStack className="w-[280px]" spacing={36}>
       <VStack spacing={32}>
-        <H3 className="text-primary-600">Categories</H3>
+        <H3 className="text-primary-600">Danh mục</H3>
 
         <VStack spacing={20} className="max-h-[300px] overflow-auto">
           {categories?.items?.map((item) => {
@@ -139,7 +139,7 @@ const FilterLeftBar = ({ onChange }: Props) => {
       <Separator />
 
       <VStack spacing={20}>
-        <H3 className="text-primary-600">Price (VND)</H3>
+        <H3 className="text-primary-600">Giá (VND)</H3>
 
         <RadioGroup value={minPrice && maxPrice ? `${minPrice}-${maxPrice}` : undefined} onValueChange={handlePriceRangeChange}>
           <VStack spacing={16}>
@@ -153,20 +153,20 @@ const FilterLeftBar = ({ onChange }: Props) => {
         </RadioGroup>
         <HStack noWrap className="px-8">
           <Separator className="flex-1 border-primary-400" />
-          <span>or</span>
+          <span>Hoặc</span>
           <Separator className="flex-1 border-primary-400" />
         </HStack>
         <HStack noWrap>
-          <Input type="number" placeholder="From (vnđ)" value={minPrice} onChange={handleMinPriceChange} />
+          <Input type="number" placeholder="Từ (VNĐ)" value={minPrice} onChange={handleMinPriceChange} />
           <span>-</span>
-          <Input type="number" placeholder="To (vnđ)" value={maxPrice} onChange={handleMaxPriceChange} />
+          <Input type="number" placeholder="Đến (VNĐ)" value={maxPrice} onChange={handleMaxPriceChange} />
         </HStack>
       </VStack>
 
       <Separator />
 
       <VStack spacing={24}>
-        <H3 className="text-primary-600">Brands</H3>
+        <H3 className="text-primary-600">Thương hiệu</H3>
 
         <VStack spacing={20} className="max-h-[300px] overflow-auto">
           {brands?.items?.map((item) => {

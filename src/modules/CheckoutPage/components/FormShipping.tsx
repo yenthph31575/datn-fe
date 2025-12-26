@@ -43,7 +43,7 @@ const FormShipping = () => {
     resolver: zodResolver(shippingSchema),
   });
 
-  // Fetch user addresses from API
+  // lấy địa chỉ người dùng từ API
   const {
     data: addressData,
     isLoading,
@@ -63,7 +63,7 @@ const FormShipping = () => {
     },
   });
 
-  // Mutations
+  // thêm địa chỉ mới
   const { mutate: createAddress } = useCreateAddressMutation({
     onSuccess: () => {
       refetch();
@@ -111,7 +111,7 @@ const FormShipping = () => {
   const handleDeleteAddress = (addressId: string) => {
     deleteAddress(addressId);
 
-    // If the deleted address was selected, clear selection
+    // Nếu xóa địa chỉ đang chọn thì reset selectedAddressId
     if (selectedAddressId === addressId) {
       setSelectedAddressId('');
     }
@@ -164,7 +164,7 @@ const FormShipping = () => {
                 <TextField label="Phường/Xã" placeholder="Nhập Phường/Xã" control={form.control} name="ward" required />
                 <TextField label="Postal Code" placeholder="Mời nhập postal code" control={form.control} name="postalCode" />
 
-                <CheckboxField label="Set as default address" control={form.control} name="isDefault" />
+                <CheckboxField label="Đặt làm địa chỉ mặc định" control={form.control} name="isDefault" />
 
                 <div className="flex justify-end gap-2 md:col-span-2">
                   <Button type="button" variant="outline" onClick={() => setIsAddingAddress(false)}>
@@ -186,9 +186,9 @@ const FormShipping = () => {
         </div>
       ) : addressData?.length === 0 ? (
         <div className="rounded-md border border-dashed p-6 text-center">
-          <p className="text-gray-500">You don't have any saved addresses.</p>
+          <p className="text-gray-500">Bạn không có địa chỉ nào được lưu.</p>
           <Button variant="outline" className="mt-2" onClick={() => setIsAddingAddress(true)}>
-            Add Your First Address
+            Thêm địa chỉ đầu tiên của bạn
           </Button>
         </div>
       ) : (

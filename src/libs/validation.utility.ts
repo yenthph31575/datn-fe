@@ -45,39 +45,39 @@ export function stringRefine<T extends ZodTypeAny>(schema: T) {
 export const zFileValidator = (size: number, fileType: MIME_TYPE[], isRequired = true) => {
   return isRequired
     ? z
-        .any()
-        .refine((file) => Boolean(file), {
-          params: { i18n: 'errors.invalid_type_received_undefined' },
-        })
-        .refine((file) => (typeof file === 'string' ? true : file?.size <= size), {
-          params: {
-            i18n: { key: 'errors.max_file_size', values: { maximum: '5MB' } },
+      .any()
+      .refine((file) => Boolean(file), {
+        params: { i18n: 'errors.invalid_type_received_undefined' },
+      })
+      .refine((file) => (typeof file === 'string' ? true : file?.size <= size), {
+        params: {
+          i18n: { key: 'errors.max_file_size', values: { maximum: '5MB' } },
+        },
+      })
+      .refine((file) => (typeof file === 'string' ? true : fileType.includes(file?.type)), {
+        params: {
+          i18n: {
+            key: 'errors.file_type_accepted',
+            values: { fileType: fileType.join(', ') },
           },
-        })
-        .refine((file) => (typeof file === 'string' ? true : fileType.includes(file?.type)), {
-          params: {
-            i18n: {
-              key: 'errors.file_type_accepted',
-              values: { fileType: fileType.join(', ') },
-            },
-          },
-        })
+        },
+      })
     : z
-        .any()
-        .optional()
-        .refine((file) => (typeof file === 'string' ? true : file ? file?.size <= size : true), {
-          params: {
-            i18n: { key: 'errors.max_file_size', values: { maximum: '5MB' } },
+      .any()
+      .optional()
+      .refine((file) => (typeof file === 'string' ? true : file ? file?.size <= size : true), {
+        params: {
+          i18n: { key: 'errors.max_file_size', values: { maximum: '5MB' } },
+        },
+      })
+      .refine((file) => (typeof file === 'string' ? true : file ? fileType.includes(file?.type) : true), {
+        params: {
+          i18n: {
+            key: 'errors.file_type_accepted',
+            values: { fileType: fileType.join(', ') },
           },
-        })
-        .refine((file) => (typeof file === 'string' ? true : file ? fileType.includes(file?.type) : true), {
-          params: {
-            i18n: {
-              key: 'errors.file_type_accepted',
-              values: { fileType: fileType.join(', ') },
-            },
-          },
-        });
+        },
+      });
 };
 
 export const twitterUrlRegex = /^https?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]{1,15})$/;
@@ -85,22 +85,34 @@ export const twitterUrlRegex = /^https?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_
 export const facebookUrlRegex = /^https?:\/\/(?:www\.)?facebook\.com\/([a-zA-Z0-9_]{1,})$/;
 
 export const validationMessages = {
-  required: (field?: string) => 'This field is required!',
-  number: (field?: string) => (field ? `${field} must be a number!` : 'This field must be a number!'),
+  required: (field?: string) => 'Trường này là bắt buộc!',
+  number: (field?: string) =>
+    field ? `${field} phải là một số!` : 'Trường này phải là một số!',
   between: (min: number, max: number, field?: string) =>
     field
-      ? `Sorry, your ${field.toLowerCase()} must be between ${min} and ${max} characters long`
-      : `Sorry, this field must be between ${min} and ${max} characters long`,
-  max: (max: number, field?: string) => `Input must be a maximum of ${max} characters!`,
+      ? `Giá trị của ${field.toLowerCase()} phải nằm trong khoảng từ ${min} đến ${max} ký tự`
+      : `Giá trị phải nằm trong khoảng từ ${min} đến ${max} ký tự`,
+  max: (max: number, field?: string) =>
+    `Giá trị nhập vào không được vượt quá ${max} ký tự!`,
   gt: (min: number, field?: string) =>
-    field ? `${field} must be at least ${min} characters` : `This field must be at least ${min} characters`,
+    field
+      ? `${field} phải có ít nhất ${min} ký tự`
+      : `Trường này phải có ít nhất ${min} ký tự`,
   gte: (min: number, field?: string) =>
-    field ? `${field} must be greater than or equal to ${min}` : `This field must be greater than or equal to ${min}`,
-  lt: (max: number, field?: string) => (field ? `${field} must be smaller than ${max}` : `This field must be smaller than ${max}`),
+    field
+      ? `${field} phải lớn hơn hoặc bằng ${min}`
+      : `Giá trị phải lớn hơn hoặc bằng ${min}`,
+  lt: (max: number, field?: string) =>
+    field
+      ? `${field} phải nhỏ hơn ${max}`
+      : `Giá trị phải nhỏ hơn ${max}`,
   lte: (max: number, field?: string) =>
-    field ? `${field} must be smaller than or equal to ${max}` : `This field must be smaller than or equal ${max}`,
+    field
+      ? `${field} phải nhỏ hơn hoặc bằng ${max}`
+      : `Giá trị phải nhỏ hơn hoặc bằng ${max}`,
   specialCharacters: () =>
-    "This field can only contain the following special characters: '-', '_', ' '. No other special characters are allowed",
-  emoji: () => 'No other emoji characters are allowed',
-  invalid: (field?: string) => (field ? `This is not a valid ${field}` : 'This is not a valid field'),
+    "Trường này chỉ được chứa các ký tự đặc biệt sau: '-', '_', ' '. Không được phép dùng ký tự đặc biệt khác.",
+  emoji: () => 'Không được phép sử dụng emoji khác.',
+  invalid: (field?: string) =>
+    field ? `${field} không hợp lệ` : 'Giá trị không hợp lệ',
 };

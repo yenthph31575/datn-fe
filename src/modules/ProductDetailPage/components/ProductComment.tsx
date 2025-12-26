@@ -11,6 +11,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
+import { vi } from 'date-fns/locale';
 
 interface ProductCommentProps {
   productId: string;
@@ -85,7 +86,7 @@ const ProductComment = ({ productId }: ProductCommentProps) => {
           <div className="mt-6 space-y-3">
             {ratingCounts.map(({ rating, count, percentage }) => (
               <div key={rating} className="flex items-center gap-2">
-                <div className="w-12 text-sm">{rating} stars</div>
+                <div className="w-12 text-sm">{rating} Sao</div>
                 <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-200">
                   <div className="h-full rounded-full bg-yellow-400" style={{ width: `${percentage}%` }} />
                 </div>
@@ -154,15 +155,15 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
             width={40}
             height={40}
             src={review.user?.avatar || '/images/no-image.svg'}
-            alt={review.user?.username || 'User'}
+            alt={review.user?.username || 'Người dùng'}
             className="h-10 w-10"
           />
           <VStack spacing={4}>
-            <span className="font-medium">{review.user?.username || 'Anonymous'}</span>
+            <span className="font-medium">{review.user?.username || 'Ẩn danh'}</span>
             <Rating value={review.rating} readOnly size="sm" />
           </VStack>
         </HStack>
-        <div className="text-gray-500 text-sm">{formatDistanceToNow(new Date(review.createdAt), { addSuffix: true })}</div>
+        <div className="text-gray-500 text-sm">{formatDistanceToNow(new Date(review.createdAt), { addSuffix: true, locale: vi })}</div>
       </HStack>
 
       <div className="mt-4">{review.comment}</div>
@@ -171,7 +172,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
         <div className="mt-4 flex flex-wrap gap-2">
           {review.images.map((image, index) => (
             <div key={index} className="relative h-20 w-20 overflow-hidden rounded-md">
-              <Image src={image} alt={`Review image ${index + 1}`} fill className="object-cover" />
+              <Image src={image} alt={`Ảnh đánh giá ${index + 1}`} fill className="object-cover" />
             </div>
           ))}
         </div>

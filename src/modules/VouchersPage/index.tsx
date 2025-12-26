@@ -23,16 +23,17 @@ const VouchersPage = () => {
 
   return (
     <div>
-      <Breadcrumb breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'Vouchers' }]} />
+      <Breadcrumb breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Mã giảm giá' }]} />
 
       <Container className="py-8">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <H2>Available Vouchers</H2>
+          <H2>Các mã giảm giá hiện có</H2>
           {/* <div className="mt-4 w-full sm:mt-0 sm:w-64">
-            <SearchInput placeholder="Search vouchers..." onSearch={handleSearch} value={searchKeyword} loading={isFetching} />
+            <SearchInput placeholder="Tìm kiếm mã giảm giá..." onSearch={handleSearch} value={searchKeyword} loading={isFetching} />
           </div> */}
         </div>
 
+        {/* Hiển thị skeleton khi đang tải dữ liệu */}
         <Show when={isFetching}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {Array.from({ length: 8 }).map((_, index) => (
@@ -43,8 +44,8 @@ const VouchersPage = () => {
 
         <Show when={!isFetching && (!data || data?.length === 0)}>
           <NoDataAvailable
-            title="No vouchers available"
-            description="There are no active vouchers available at the moment."
+            title="Không có mã giảm giá"
+            description="Hiện tại không có mã giảm giá nào khả dụng."
             icon={<Ticket className="h-16 w-16 text-gray-400" />}
             action={
               <Link href={ROUTER.COLLECTIONS}>

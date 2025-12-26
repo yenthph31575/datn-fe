@@ -159,7 +159,6 @@ const SearchComponent = () => {
               <p className="text-gray-500">Không tìm thấy sản phẩm</p>
               <p className="text-gray-400 text-sm">Hãy thử từ khóa khác</p>
             </div>
-
           ) : (
             <div className="flex h-20 items-center justify-center">
               <p className="text-gray-500">Nhập tối thiểu 2 ký tự để tìm kiếm</p>

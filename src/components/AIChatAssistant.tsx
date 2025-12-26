@@ -21,7 +21,7 @@ const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([
-    { id: '1', content: 'Xin chào đến với kiddie kingdom shop, bạn cần giúp đỡ gì?', isUser: false },
+    { id: '1', content: 'Xin chào đến với Kiddie Kingdom shop, bạn cần giúp đỡ gì?', isUser: false },
   ]);
   const [chatHistory, setChatHistory] = useState<string[]>([]);
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
@@ -143,9 +143,8 @@ const AIChatAssistant = () => {
                 {messages.map((message) => (
                   <div key={message.id} className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
                     <div
-                      className={`max-w-[80%] rounded-lg p-2 ${
-                        message.isUser ? 'rounded-tr-none bg-primary-500 text-white' : 'rounded-tl-none border bg-white shadow-sm'
-                      }`}
+                      className={`max-w-[80%] rounded-lg p-2 ${message.isUser ? 'rounded-tr-none bg-primary-500 text-white' : 'rounded-tl-none border bg-white shadow-sm'
+                        }`}
                     >
                       {message.isUser ? (
                         <div dangerouslySetInnerHTML={{ __html: message.content }}></div>

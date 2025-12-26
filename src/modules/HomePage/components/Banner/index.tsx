@@ -8,9 +8,12 @@ import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 const Banner = () => {
   const sliders = [
-    { image: 'https://mykingdom.com.vn/cdn/shop/files/mkd_size_1280_496.png?v=1745988888&width=1200' },
-    { image: 'https://mykingdom.com.vn/cdn/shop/files/1._1280x496_9fb1a822-6277-4796-b7ac-92bf2a3f607c.jpg?v=1745916141&width=1200' },
-    { image: 'https://mykingdom.com.vn/cdn/shop/files/1._1280x496_14526ed1-0e57-45fb-aef4-c04dc427f753.png?v=1745311794&width=1200' },
+    { image: 'https://mykingdom.com.vn/cdn/shop/files/1._1280x496_3cba42d7-32c1-48e0-83fd-5f66eb74724e.png?v=1764520675&width=1200' },
+    { image: 'https://mykingdom.com.vn/cdn/shop/files/1280_x_496_22340f1f-527a-4e1a-9a7d-3cca16bd91e3.jpg?v=1764521656&width=1200' },
+    {
+      image:
+        'https://mykingdom.com.vn/cdn/shop/files/header_banner_1280x496_c1a610e8-1a7a-4737-af85-609019a662af.jpg?v=1762528195&width=1200',
+    },
   ];
   return (
     <div>
