@@ -113,9 +113,9 @@ const UploadButtonField = <T extends FieldValues>({
               }}
               onSizeError={(type: string) => {
                 if (type === 'File size is too small') {
-                  toast.error('Cannot upload files smaller than 1KB !');
+                  toast.error('Không thể tải file nhỏ hơn 1KB!');
                 } else {
-                  toast.error('The data size must be less than ' + (props?.maxSize ?? 25) + 'MB !');
+                  toast.error('Kích thước dữ liệu phải nhỏ hơn ' + (props?.maxSize ?? 25) + 'MB!');
                 }
               }}
               onTypeError={(error: string) => {
@@ -128,13 +128,13 @@ const UploadButtonField = <T extends FieldValues>({
                 </div> */}
 
                 <div className="mt-2 text-center text-[#898989] text-sm">
-                  <span className="mr-1 font-semibold text-[#131313]">Click to upload</span>
-                  or drag and drop <br />
-                  PNG or JPEG (max. {props?.maxSize ?? 25} MB)
+                  <span className="mr-1 font-semibold text-[#131313]">Nhấn để tải lên</span>
+                  hoặc kéo và thả <br />
+                  PNG hoặc JPEG (tối đa {props?.maxSize ?? 25} MB)
                 </div>
 
                 <Button variant={'outline'} className="mt-3">
-                  Select Files
+                  Chọn tệp
                 </Button>
 
                 {/* <div className="text-gray-800 text-sm">DOCX, PDF, CSV or XLSX (max. 25 MB)</div> */}
@@ -163,7 +163,7 @@ const UploadButtonField = <T extends FieldValues>({
                   }}
                 >
                   <Icons.trash className="mr-2 text-red-600" />
-                  Delete
+                  Xóa
                 </Button>
               </div>
             )}

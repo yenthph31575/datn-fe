@@ -163,9 +163,9 @@ const UploadImagesField = <T extends FieldValues>({
                 }}
                 onSizeError={(type: string) => {
                   if (type === 'File size is too small') {
-                    toast.error('Cannot upload files smaller than 1KB !');
+                    toast.error('Không thể tải file nhỏ hơn 1KB!');
                   } else {
-                    toast.error('Learning data size must be less than ' + (props.maxSize ?? 25) + 'MB !');
+                    toast.error('Kích thước dữ liệu phải nhỏ hơn ' + (props.maxSize ?? 25) + 'MB!');
                   }
                 }}
                 onTypeError={(error: string) => {
@@ -178,11 +178,11 @@ const UploadImagesField = <T extends FieldValues>({
                   </div>
 
                   <div className="mt-2 text-gray-800 text-sm">
-                    <span className="mr-1 font-semibold text-tertiary-900">Click to upload</span>
-                    or drag and drop
+                    <span className="mr-1 font-semibold text-tertiary-900">Nhấn để tải lên</span>
+                    hoặc kéo và thả<br />
                   </div>
 
-                  <div className="text-gray-800 text-sm"> (max. 25 MB)</div>
+                  <div className="text-gray-800 text-sm"> (tối đa 25 MB)</div>
                 </VStack>
               </FileUploader>
               <FormControl></FormControl>
