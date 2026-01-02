@@ -43,7 +43,7 @@ const ProductImage = ({ images = [] }: ProductInfoProps) => {
         {images.map((item, index) => (
           <SwiperSlide key={index}>
             <HStack pos="center">
-              <Image src={item} alt={`Slide ${index + 1}`} className="w-full rounded-lg" width={500} height={500} />
+              <Image src={item} alt={`Ảnh sản phẩm ${index + 1}`} className="w-full rounded-lg" width={500} height={500} />
             </HStack>
           </SwiperSlide>
         ))}

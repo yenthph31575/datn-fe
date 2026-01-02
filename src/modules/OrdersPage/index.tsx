@@ -70,14 +70,14 @@ const OrdersPage = () => {
 
   return (
     <div>
-      <Breadcrumb breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'My Orders' }]} />
+      <Breadcrumb breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Đơn hàng của tôi' }]} />
 
       <Container className="py-8">
-        <H2 className="mb-6">My Orders</H2>
+        <H2 className="mb-6">Đơn hàng của tôi </H2>
 
         <div className="mb-6">
           <div className="mb-2 flex items-center">
-            <h3 className="font-medium text-lg">Filter by Status</h3>
+            <h3 className="font-medium text-lg">Lọc theo trạng thái</h3>
           </div>
           <Tabs
             data={[
@@ -86,7 +86,7 @@ const OrdersPage = () => {
               { label: 'Đang xử lý', value: 'pending' },
               { label: 'Đang vận chuyển', value: 'shipping' },
               { label: 'Đã hủy', value: 'cancelled' },
-              { label: 'Payment Failed', value: 'payment-failed' },
+              { label: 'Thanh toán thất bại', value: 'payment-failed' },
             ]}
             onChange={handleTabChange}
             value={activeTab}

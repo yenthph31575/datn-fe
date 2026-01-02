@@ -31,7 +31,7 @@ export const getShippingStatusText = (status: OrderStatus) => {
     case 'CANCELED':
       return 'Đã hủy';
     default:
-      return 'Unknown';
+      return 'Không xác địnhđịnh';
   }
 };
 
@@ -74,11 +74,11 @@ export const getPaymentStatusText = (status: PaymentStatus) => {
     case 'PENDING':
       return 'Đang chờ thanh toán';
     case 'FAILED':
-      return 'Failed';
+      return 'Thanh toán thất bại';
     case 'REFUNDED':
       return 'Đã hoàn tiền';
     default:
-      return 'Unknown';
+      return 'Không xác định';
   }
 };
 
@@ -102,6 +102,14 @@ export const getSimplifiedStatusDisplay = (order: IOrder) => {
     return order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED';
   };
 
+  if (order.paymentStatus === 'REFUNDED') {
+    return {
+      icon: <RefreshCw className="h-5 w-5 text-blue-500" />,
+      text: 'Đã hoàn tiền',
+      color: 'bg-blue-100 text-blue-800',
+    };
+  }
+
   if (isOrderFullyCompleted(order)) {
     return {
       icon: <CheckCircle className="h-5 w-5 text-green-500" />,
@@ -121,7 +129,7 @@ export const getSimplifiedStatusDisplay = (order: IOrder) => {
   if (order.paymentStatus === 'FAILED') {
     return {
       icon: <AlertCircle className="h-5 w-5 text-red-500" />,
-      text: 'Payment Failed',
+      text: 'Thanh toán thất bại',
       color: 'bg-red-100 text-red-800',
     };
   }
@@ -152,7 +160,7 @@ export const getSimplifiedStatusDisplay = (order: IOrder) => {
 
   return {
     icon: <AlertCircle className="h-5 w-5 text-gray-500" />,
-    text: 'Unknown',
+    text: 'Không xác định',
     color: 'bg-gray-100 text-gray-800',
   };
 };
@@ -175,6 +183,6 @@ export const getPaymentMethodText = (method: PaymentMethod) => {
     case 'ONLINE_PAYMENT':
       return 'Thanh toán online';
     default:
-      return 'Unknown';
+      return 'Không xác định';
   }
 };
