@@ -102,6 +102,14 @@ export const getSimplifiedStatusDisplay = (order: IOrder) => {
     return order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED';
   };
 
+  if (order.paymentStatus === 'REFUNDED') {
+    return {
+      icon: <RefreshCw className="h-5 w-5 text-blue-500" />,
+      text: 'Đã hoàn tiền',
+      color: 'bg-blue-100 text-blue-800',
+    };
+  }
+
   if (isOrderFullyCompleted(order)) {
     return {
       icon: <CheckCircle className="h-5 w-5 text-green-500" />,

@@ -32,13 +32,10 @@ const ProductItem = ({
   averageRating,
   reviewCount,
 }: Props) => {
-  // Nếu không có giá gốc thì lấy giá hiện tại + 10.000
   const _originalPrice = originalPrice ? originalPrice : Number(currentPrice) + 10000;
   return (
-    // Click vào sản phẩm sẽ chuyển sang trang chi tiết
     <Link href={`${ROUTER.PRODUCTS}/${slug}`}>
       <VStack className="group relative h-full rounded-lg border p-4">
-        {/* Hình ảnh sản phẩm */}
         <SkeletonWrapper loading={loading}>
           <div className="flex-1 overflow-hidden">
             <Image
@@ -100,7 +97,7 @@ const ProductItem = ({
           <div className="absolute top-2 right-2 flex items-center bg-[#ffe97a] text-[#ec3814]">
             <Icons.lightning className="mr-1" /> -{formatNumber(((_originalPrice - Number(currentPrice || 0)) / _originalPrice) * 100)} %
           </div>
-          <div className="absolute top-2 left-2 rounded bg-primary-500 px-2 py-1 text-white">Mới</div>
+          <div className="absolute top-2 left-2 rounded bg-primary-500 px-2 py-1 text-white">New</div>
         </div>
       </VStack>
     </Link>

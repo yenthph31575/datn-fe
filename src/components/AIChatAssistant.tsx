@@ -143,8 +143,9 @@ const AIChatAssistant = () => {
                 {messages.map((message) => (
                   <div key={message.id} className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
                     <div
-                      className={`max-w-[80%] rounded-lg p-2 ${message.isUser ? 'rounded-tr-none bg-primary-500 text-white' : 'rounded-tl-none border bg-white shadow-sm'
-                        }`}
+                      className={`max-w-[80%] rounded-lg p-2 ${
+                        message.isUser ? 'rounded-tr-none bg-primary-500 text-white' : 'rounded-tl-none border bg-white shadow-sm'
+                      }`}
                     >
                       {message.isUser ? (
                         <div dangerouslySetInnerHTML={{ __html: message.content }}></div>

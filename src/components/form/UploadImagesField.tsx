@@ -179,7 +179,8 @@ const UploadImagesField = <T extends FieldValues>({
 
                   <div className="mt-2 text-gray-800 text-sm">
                     <span className="mr-1 font-semibold text-tertiary-900">Nhấn để tải lên</span>
-                    hoặc kéo và thả<br />
+                    hoặc kéo và thả
+                    <br />
                   </div>
 
                   <div className="text-gray-800 text-sm"> (tối đa 25 MB)</div>

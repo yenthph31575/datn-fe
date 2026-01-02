@@ -11,7 +11,7 @@ import { cn, onMutateError } from '@/libs/common';
 import { ROUTER } from '@/libs/router';
 import { formatNumber } from '@/libs/utils';
 import { format } from 'date-fns';
-import { AlertCircle, ArrowLeft, CheckCircle, Loader2, Package, Truck, X } from 'lucide-react';
+import { AlertCircle, ArrowLeft, CheckCircle, Loader2, Package, RefreshCw, Truck, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
@@ -34,9 +34,18 @@ const OrderDetailPage = () => {
     onError: onMutateError,
   });
 
-
   const getStatusBadge = () => {
     if (!order) return null;
+
+    // Kiểm tra xem đơn hàng đã hoàn tiền chưa
+    if (order.paymentStatus === 'REFUNDED') {
+      return (
+        <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-blue-100 text-blue-800')}>
+          <RefreshCw className="h-5 w-5" />
+          Đã hoàn tiền
+        </span>
+      );
+    }
 
     // Kiểm tra xem đơn hàng đã hoàn tất hay chưa (đã giao hàng và đã thanh toán)
     if (order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED') {
