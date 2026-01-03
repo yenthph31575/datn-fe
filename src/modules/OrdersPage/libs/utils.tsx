@@ -186,3 +186,113 @@ export const getPaymentMethodText = (method: PaymentMethod) => {
       return 'Không xác định';
   }
 };
+
+// Return Status utilities
+export const getReturnStatusIcon = (status: string) => {
+  switch (status) {
+    case 'NONE':
+      return null;
+    case 'REQUESTED':
+      return <Clock className="h-5 w-5 text-orange-500" />;
+    case 'APPROVED':
+      return <CheckCircle className="h-5 w-5 text-blue-500" />;
+    case 'REJECTED':
+      return <X className="h-5 w-5 text-red-500" />;
+    case 'COMPLETED':
+      return <CheckCircle className="h-5 w-5 text-green-500" />;
+    case 'REFUNDED':
+      return <RefreshCw className="h-5 w-5 text-blue-500" />;
+    case 'EXCHANGED':
+      return <RefreshCw className="h-5 w-5 text-purple-500" />;
+    default:
+      return <AlertCircle className="h-5 w-5 text-gray-500" />;
+  }
+};
+
+export const getReturnStatusText = (status: string) => {
+  switch (status) {
+    case 'NONE':
+      return '';
+    case 'REQUESTED':
+      return 'Yêu cầu hoàn trả';
+    case 'APPROVED':
+      return 'Đã chấp nhận hoàn trả';
+    case 'REJECTED':
+      return 'Từ chối hoàn trả';
+    case 'COMPLETED':
+      return 'Đã hoàn trả';
+    case 'REFUNDED':
+      return 'Đã hoàn tiền';
+    case 'EXCHANGED':
+      return 'Đã đổi hàng';
+    default:
+      return 'Không xác định';
+  }
+};
+
+export const getReturnStatusColor = (status: string) => {
+  switch (status) {
+    case 'NONE':
+      return '';
+    case 'REQUESTED':
+      return 'bg-orange-100 text-orange-800';
+    case 'APPROVED':
+      return 'bg-blue-100 text-blue-800';
+    case 'REJECTED':
+      return 'bg-red-100 text-red-800';
+    case 'COMPLETED':
+      return 'bg-green-100 text-green-800';
+    case 'REFUNDED':
+      return 'bg-blue-100 text-blue-800';
+    case 'EXCHANGED':
+      return 'bg-purple-100 text-purple-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
+  }
+};
+
+// Item Status utilities
+export const getItemStatusIcon = (status: string) => {
+  switch (status) {
+    case 'NORMAL':
+      return null;
+    case 'RETURNED':
+      return <RefreshCw className="h-4 w-4 text-orange-500" />;
+    case 'RETURN_REQUESTED':
+      return <Clock className="h-4 w-4 text-orange-500" />;
+    case 'REFUNDED':
+      return <CheckCircle className="h-4 w-4 text-blue-500" />;
+    default:
+      return null;
+  }
+};
+
+export const getItemStatusText = (status: string) => {
+  switch (status) {
+    case 'NORMAL':
+      return '';
+    case 'RETURNED':
+      return 'Đã trả hàng';
+    case 'RETURN_REQUESTED':
+      return 'Yêu cầu trả hàng';
+    case 'REFUNDED':
+      return 'Đã hoàn tiền';
+    default:
+      return '';
+  }
+};
+
+export const getItemStatusColor = (status: string) => {
+  switch (status) {
+    case 'NORMAL':
+      return '';
+    case 'RETURNED':
+      return 'bg-orange-100 text-orange-800';
+    case 'RETURN_REQUESTED':
+      return 'bg-yellow-100 text-yellow-800';
+    case 'REFUNDED':
+      return 'bg-blue-100 text-blue-800';
+    default:
+      return '';
+  }
+};

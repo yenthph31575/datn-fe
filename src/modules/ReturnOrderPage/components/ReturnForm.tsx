@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FormWrapper } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { ROUTER } from '@/libs/router';
 import { formatNumber } from '@/libs/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Minus, Plus } from 'lucide-react';
@@ -83,12 +84,13 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
   const form = useForm<ReturnFormValues>({
     resolver: zodResolver(returnFormSchema),
     defaultValues: {
-      reason: '',
-      bankName: '',
-      accountNumber: '',
-      accountHolder: '',
-      email: '',
-      description: '',
+      reason: order.returnRequest?.reason || '',
+      bankName: order.returnRequest?.refundInfo?.bankName || '',
+      accountNumber: order.returnRequest?.refundInfo?.bankAccount || '',
+      accountHolder: order.returnRequest?.refundInfo?.bankAccountName || '',
+      email: order.returnRequest?.email || '',
+      description: order.returnRequest?.description || '',
+      type: order.returnRequest?.type || undefined,
     },
   });
 
@@ -151,11 +153,13 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
       await createReturnRequest(payload);
 
       toast.success('Yêu cầu hoàn hàng đã được gửi thành công!');
-      // router.push(ROUTER.ORDERS);
+      router.push(ROUTER.ORDERS);
     } catch (error: any) {
       toast.error(error?.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại sau');
     }
   };
+
+  const hasExistingRequest = !!order.returnRequest;
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -176,6 +180,7 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
                     <Checkbox
                       checked={selectedItems[item.variantId] !== undefined}
                       onCheckedChange={() => handleToggleItem(item.variantId, item.quantity)}
+                      disabled={hasExistingRequest}
                     />
                   </div>
                   <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -227,6 +232,7 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
             fullWidth
             data={REASON_OPTIONS}
             placeholder="Chọn lý do hoàn hàng"
+            disabled={hasExistingRequest}
           />
 
           {form.watch('reason') && (
@@ -241,6 +247,7 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
                 { label: 'Đổi trả', value: 'EXCHANGE' },
               ]}
               placeholder="Chọn phương án xử lý"
+              disabled={hasExistingRequest}
             />
           )}
 
@@ -248,7 +255,15 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
             <div className="rounded-lg bg-gray-50 p-4">
               <h3 className="mb-4 font-medium text-gray-900">Thông tin tài khoản nhận tiền hoàn</h3>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <TextField control={form.control} name="bankName" label="Tên ngân hàng" required fullWidth placeholder="VD: Vietcombank" />
+                <TextField
+                  control={form.control}
+                  name="bankName"
+                  label="Tên ngân hàng"
+                  required
+                  fullWidth
+                  placeholder="VD: Vietcombank"
+                  disabled={hasExistingRequest}
+                />
                 <TextField
                   control={form.control}
                   name="accountHolder"
@@ -256,6 +271,7 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
                   required
                   fullWidth
                   placeholder="Tên in hoa không dấu"
+                  disabled={hasExistingRequest}
                 />
                 <div className="md:col-span-2">
                   <TextField
@@ -265,13 +281,22 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
                     required
                     fullWidth
                     placeholder="Nhập số tài khoản"
+                    disabled={hasExistingRequest}
                   />
                 </div>
               </div>
             </div>
           )}
 
-          <TextField control={form.control} name="email" label="Email liên hệ" required fullWidth placeholder="example@email.com" />
+          <TextField
+            control={form.control}
+            name="email"
+            label="Email liên hệ"
+            required
+            fullWidth
+            placeholder="example@email.com"
+            disabled={hasExistingRequest}
+          />
           <p className="-mt-4 text-[0.8rem] text-muted-foreground">
             Chúng tôi sẽ gửi thông tin cập nhật về yêu cầu hoàn hàng qua email này.
           </p>
@@ -282,11 +307,12 @@ const ReturnForm = ({ order }: ReturnFormProps) => {
             label="Mô tả chi tiết / Ghi chú thêm"
             fullWidth
             placeholder="Mô tả chi tiết vấn đề bạn gặp phải..."
+            disabled={hasExistingRequest}
           />
 
           <div className="flex justify-end pt-4">
-            <Button type="submit" size="lg" className="w-full md:w-auto">
-              Gửi yêu cầu hoàn hàng
+            <Button type="submit" size="lg" className="w-full md:w-auto" disabled={hasExistingRequest}>
+              {hasExistingRequest ? 'Đã gửi yêu cầu' : 'Gửi yêu cầu hoàn hàng'}
             </Button>
           </div>
         </div>

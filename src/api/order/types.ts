@@ -55,6 +55,23 @@ export interface IOrder {
   cancelledReason?: string;
   returnStatus?: ReturnStatus;
   orderType?: 'NORMAL' | 'RETURN' | 'EXCHANGE';
+  returnRequest?: IReturnRequest;
+}
+
+export interface IReturnRequest {
+  _id: string;
+  type: 'RETURN' | 'EXCHANGE';
+  reason: string;
+  description?: string;
+  status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'COMPLETED';
+  exchangeOrderId?: string;
+  createdAt: string;
+  email?: string;
+  refundInfo?: {
+    bankName: string;
+    bankAccount: string;
+    bankAccountName: string;
+  };
 }
 
 export interface IOrderResponse {

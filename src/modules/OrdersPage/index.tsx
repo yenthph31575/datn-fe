@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import OrderItem from './components/OrderItem';
 
 // Tab type to handle simplified status
-type OrderFilterTab = 'all' | 'pending' | 'processing' | 'shipping' | 'completed' | 'cancelled' | 'payment-failed';
+type OrderFilterTab = 'all' | 'pending' | 'processing' | 'shipping' | 'completed' | 'cancelled' | 'payment-failed' | 'return';
 
 const OrdersPage = () => {
   const [activeTab, setActiveTab] = useState<OrderFilterTab>('all');
@@ -26,7 +26,7 @@ const OrdersPage = () => {
   const [limit, setLimit] = useState(5);
 
   // Convert tab to API status filters
-  const getStatusFilters = (): { shippingStatus?: OrderStatus; paymentStatus?: PaymentStatus } => {
+  const getStatusFilters = (): { shippingStatus?: OrderStatus; paymentStatus?: PaymentStatus, isReturn?: boolean } => {
     switch (activeTab) {
       // Main status tabs
       case 'pending':
@@ -39,6 +39,8 @@ const OrdersPage = () => {
         return { shippingStatus: 'CANCELED' };
       case 'payment-failed':
         return { paymentStatus: 'FAILED' };
+      case 'return':
+        return { isReturn: true };
 
       // Combined success status - both delivered and payment completed
       case 'completed':
@@ -87,6 +89,7 @@ const OrdersPage = () => {
               { label: 'Đang vận chuyển', value: 'shipping' },
               { label: 'Đã hủy', value: 'cancelled' },
               { label: 'Thanh toán thất bại', value: 'payment-failed' },
+              { label: 'Đơn hoàn trả', value: 'return' },
             ]}
             onChange={handleTabChange}
             value={activeTab}

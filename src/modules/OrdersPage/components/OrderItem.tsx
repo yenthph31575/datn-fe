@@ -16,6 +16,9 @@ import {
   getPaymentStatusColor,
   getPaymentStatusIcon,
   getPaymentStatusText,
+  getReturnStatusColor,
+  getReturnStatusIcon,
+  getReturnStatusText,
   getShippingStatusColor,
   getShippingStatusIcon,
   getShippingStatusText,
@@ -68,6 +71,19 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
               <span className="ml-1">{getSimplifiedStatusDisplay(order).text}</span>
             </span>
 
+            {/* Return status badge */}
+            {order.returnStatus && order.returnStatus !== 'NONE' && (
+              <span
+                className={cn(
+                  'flex items-center rounded-full px-3 py-1 font-medium text-xs shadow-sm',
+                  getReturnStatusColor(order.returnStatus)
+                )}
+              >
+                {getReturnStatusIcon(order.returnStatus)}
+                <span className="ml-1">{getReturnStatusText(order.returnStatus)}</span>
+              </span>
+            )}
+
             <Button variant="ghost" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="hover:bg-gray-100">
               {isExpanded ? 'Ẩn chi tiết' : 'Xem chi tiết'}
             </Button>
@@ -106,8 +122,9 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
                   variant="outline"
                   size="sm"
                   className="w-full border-orange-200 text-orange-700 hover:bg-orange-50 hover:text-orange-800"
+                  disabled={!!order.returnRequest}
                 >
-                  Hoàn hàng
+                  {order.returnRequest ? 'Đã hoàn hàng' : 'Hoàn hàng'}
                 </Button>
               </Link>
             )}
