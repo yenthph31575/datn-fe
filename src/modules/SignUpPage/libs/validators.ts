@@ -2,30 +2,33 @@ import { validationMessages } from '@/libs/validation.utility';
 import { z } from 'zod';
 
 export const authSchema = z.object({
-  email: z.string({ required_error: 'Email là bắt buộc' }).email().nonempty(validationMessages.required('Email')),
+
+  email: z.string({ required_error: 'Email không được để trống. ' }).email().nonempty(validationMessages.required('Email')),
   password: z
-    .string({ required_error: 'Password là bắt buộc' })
-    .nonempty(validationMessages.required('Mật khẩu'))
+    .string({ required_error: 'Mật khẩu không được để trống.' })
+    .nonempty(validationMessages.required('Password'))
     .min(6, {
-      message: 'Email hoặc mật khẩu không chính xác!',
+      message: '!',
     })
     .max(100)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
-      message: 'Email hoặc mật khẩu không chính xác!',
+      message: 'Email hoặc mật khẩu không đúng!',
     }),
 });
 export const signUpSchema = z.object({
-  username: z.string({ required_error: 'Tên người dùng là bắt buộc' }).nonempty(validationMessages.required('Tên người dùng')),
-  email: z.string({ required_error: 'Email là bắt buộc' }).email().nonempty(validationMessages.required('Email')),
+  username: z.string({ required_error: 'Tên đăng nhập không được để trống.' }).nonempty(validationMessages.required('Username')),
+  email: z.string({ required_error: 'Email không được để trống.' }).email().nonempty(validationMessages.required('Email')),
   password: z
-    .string({ required_error: 'Mật khẩu là bắt buộc' })
-    .nonempty(validationMessages.required('Mật khẩu'))
+    .string({ required_error: 'Mật khẩu không được để trống.' })
+    .nonempty(validationMessages.required('Password'))
     .min(6, {
-      message: 'Email hoặc mật khẩu không chính xác!',
+      message: 'Email hoặc mật khẩu không đúng!',
     })
     .max(100)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
-      message: 'Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt',
+      message: 'Tên đăng nhập hoặc mật khẩu không đúng!',
+
+
     }),
 });
 
