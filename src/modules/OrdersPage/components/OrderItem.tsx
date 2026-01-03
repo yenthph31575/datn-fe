@@ -44,6 +44,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
   // Thêm hàm lấy trạng thái hiển thị đơn giản
 
   const canReview = order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED';
+  const canReturn = canReview;
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md">
@@ -99,6 +100,17 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
                 Xem đơn hàng
               </Button>
             </Link>
+            {canReturn && (
+              <Link href={`${ROUTER.ORDERS}/${order._id}/return`}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full border-orange-200 text-orange-700 hover:bg-orange-50 hover:text-orange-800"
+                >
+                  Hoàn hàng
+                </Button>
+              </Link>
+            )}
             {order.shippingStatus === 'PENDING' && order.paymentStatus === 'PENDING' && order.paymentMethod === 'CASH_ON_DELIVERY' && (
               <DialogCancelOrder orderId={order._id} refetch={refetch} />
             )}
@@ -374,6 +386,17 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
                   {order.shippingStatus === 'PENDING' &&
                     order.paymentStatus === 'PENDING' &&
                     order.paymentMethod === 'CASH_ON_DELIVERY' && <DialogCancelOrder orderId={order._id} refetch={refetch} />}
+                  {canReturn && (
+                    <Link href={`${ROUTER.ORDERS}/${order._id}/return`} className="w-full">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full border-orange-200 text-orange-700 hover:bg-orange-50 hover:text-orange-800"
+                      >
+                        Hoàn hàng
+                      </Button>
+                    </Link>
+                  )}
                   <Link href={`${ROUTER.ORDERS}/${order._id}`} className="w-full">
                     <Button
                       variant="outline"
