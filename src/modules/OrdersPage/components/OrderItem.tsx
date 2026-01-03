@@ -80,7 +80,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
           <div>
             <H4 className="mb-1 text-primary-700">Tổng cộng: {formatNumber((order.totalAmount || 0) + (order.discountAmount || 0))}</H4>
             <HStack spacing={4} className="text-gray-500 text-sm">
-              <span className="font-medium">{order.items.length} items</span>
+              <span className="font-medium">{order.items.length} sản phẩm</span>
               <span>•</span>
               <span className="flex items-center">
                 {getPaymentMethodIcon(order.paymentMethod)}
@@ -96,7 +96,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
                 size="sm"
                 className="w-full border-primary-200 text-primary-700 hover:bg-primary-50 hover:text-primary-800"
               >
-                View Order
+                Xem đơn hàng
               </Button>
             </Link>
             {order.shippingStatus === 'PENDING' && order.paymentStatus === 'PENDING' && order.paymentMethod === 'CASH_ON_DELIVERY' && (
@@ -133,7 +133,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
 
                 <VStack>
                   <span className="line-clamp-1 font-medium text-sm">{item.productName}</span>
-                  <span className="text-gray-500 text-xs">Qty: {item.quantity}</span>
+                  <span className="text-gray-500 text-xs">Số lượng: {item.quantity}</span>
                 </VStack>
               </HStack>
 
@@ -268,7 +268,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
                               <span className="text-gray-500 text-xs">
                                 Số lượng: {item.quantity} x {formatNumber(item.price)}
                               </span>
-                              <span className="font-medium text-primary-700 text-sm">{formatNumber(item.price * item.quantity)} vnđ</span>
+                              <span className="font-medium text-primary-700 text-sm">{formatNumber(item.price * item.quantity)} VNĐ</span>
                             </HStack>
 
                             {/* Review button for completed orders */}

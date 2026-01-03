@@ -2,30 +2,30 @@ import { validationMessages } from '@/libs/validation.utility';
 import { z } from 'zod';
 
 export const authSchema = z.object({
-  email: z.string({ required_error: 'Email is required' }).email().nonempty(validationMessages.required('Email')),
+  email: z.string({ required_error: 'Email không được để trống. ' }).email().nonempty(validationMessages.required('Email')),
   password: z
-    .string({ required_error: 'Password is required' })
+    .string({ required_error: 'Mật khẩu không được để trống.' })
     .nonempty(validationMessages.required('Password'))
     .min(6, {
-      message: 'The username or password you entered is incorrect!',
+      message: '!',
     })
     .max(100)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
-      message: 'The username or password you entered is incorrect!',
+      message: 'Email hoặc mật khẩu không đúng!',
     }),
 });
 export const signUpSchema = z.object({
-  username: z.string({ required_error: 'Username is required' }).nonempty(validationMessages.required('Username')),
-  email: z.string({ required_error: 'Email is required' }).email().nonempty(validationMessages.required('Email')),
+  username: z.string({ required_error: 'Tên đăng nhập không được để trống.' }).nonempty(validationMessages.required('Username')),
+  email: z.string({ required_error: 'Email không được để trống.' }).email().nonempty(validationMessages.required('Email')),
   password: z
-    .string({ required_error: 'Password is required' })
+    .string({ required_error: 'Mật khẩu không được để trống.' })
     .nonempty(validationMessages.required('Password'))
     .min(6, {
-      message: 'The username or password you entered is incorrect!',
+      message: 'Email hoặc mật khẩu không đúng!',
     })
     .max(100)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
-      message: 'The username or password you entered is incorrect!',
+      message: 'Tên đăng nhập hoặc mật khẩu không đúng!',
     }),
 });
 

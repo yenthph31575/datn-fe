@@ -93,7 +93,7 @@ const UserProfileDialog = () => {
           <Tabs defaultValue="profile" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="profile">Thông tin cá nhân</TabsTrigger>
-              <TabsTrigger value="password">Password</TabsTrigger>
+              <TabsTrigger value="password">Mật khẩu</TabsTrigger>
             </TabsList>
 
             <TabsContent value="profile">
@@ -103,7 +103,7 @@ const UserProfileDialog = () => {
                     <UploadAvatarField control={form.control} name="avatar" />
                   </HStack>
 
-                  <TextField required fullWidth control={form.control} name="username" label="Username" placeholder="Mời nhập username" />
+                  <TextField required fullWidth control={form.control} name="username" label="Tên đăng nhập" placeholder="Mời nhập tên đăng nhập" />
 
                   <TextField
                     required

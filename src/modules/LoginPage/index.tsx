@@ -90,8 +90,8 @@ const LoginPage = () => {
               fullWidth
               control={form.control}
               name="password"
-              label="Password"
-              placeholder="Mời nhập password"
+              label="Mật khẩu"
+              placeholder="Mời nhập mật khẩu"
               type="password"
             />
             <div className="-mt-3 text-right">
