@@ -6,7 +6,7 @@ import { HStack, Show, VStack } from '@/components/utilities';
 import { cn } from '@/libs/common';
 import { ROUTER } from '@/libs/router';
 import { formatNumber } from '@/libs/utils';
-import { format } from 'date-fns';
+import { differenceInDays, format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -44,7 +44,7 @@ const OrderItem = ({ order, onCancelSuccess, refetch }: OrderItemProps) => {
   // Thêm hàm lấy trạng thái hiển thị đơn giản
 
   const canReview = order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED';
-  const canReturn = canReview;
+  const canReturn = canReview && order.deliveredAt && differenceInDays(new Date(), new Date(order.deliveredAt)) <= 3;
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md">

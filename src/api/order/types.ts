@@ -4,6 +4,8 @@ import type { IProduct } from '../product/types';
 export type PaymentMethod = 'CASH_ON_DELIVERY' | 'ONLINE_PAYMENT';
 export type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELED';
 export type PaymentStatus = 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
+export type ReturnStatus = 'NONE' | 'REQUESTED' | 'APPROVED' | 'REJECTED' | 'COMPLETED' | 'REFUNDED' | 'EXCHANGED';
+export type ItemStatus = 'NORMAL' | 'RETURNED' | 'RETURN_REQUESTED' | 'REFUNDED';
 export interface IOrderItem {
   _id: string;
   productId: string;
@@ -14,6 +16,7 @@ export interface IOrderItem {
   productImage?: string;
   attributes?: Record<string, string>;
   isReviewed?: boolean;
+  itemStatus?: ItemStatus;
 }
 
 export interface IShippingAddress {
@@ -41,6 +44,7 @@ export interface IOrder {
   shippingAddress: IShippingAddress;
   createdAt: string;
   updatedAt: string;
+  deliveredAt?: string;
   paymentSession?: {
     url: string;
     paymentId: string;
@@ -49,6 +53,8 @@ export interface IOrder {
   userNote?: string;
   shipperOfProof?: string[];
   cancelledReason?: string;
+  returnStatus?: ReturnStatus;
+  orderType?: 'NORMAL' | 'RETURN' | 'EXCHANGE';
 }
 
 export interface IOrderResponse {

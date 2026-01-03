@@ -36,7 +36,7 @@ function Providers({ children }: ProvidersProps) {
       <QueryClientProvider client={queryClient}>
         <>{children}</>
         <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
-        <ToastContainer autoClose={2000} />
+        <ToastContainer autoClose={2000} position="bottom-right" />
         <ProgressBar height="2px" color="#a3683c" options={{ showSpinner: false }} shallowRouting />{' '}
       </QueryClientProvider>
     </NextThemesProvider>

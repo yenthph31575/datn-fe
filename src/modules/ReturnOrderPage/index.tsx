@@ -1,5 +1,4 @@
 'use client';
-
 import { useOrderByIdQuery } from '@/api/order/queries';
 import Breadcrumb from '@/components/Breadcrumb';
 import { Button } from '@/components/ui/button';
@@ -8,9 +7,8 @@ import { ROUTER } from '@/libs/router';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import OrderInfo from './components/OrderInfo';
-import ReturnForm, { ReturnFormValues } from './components/ReturnForm';
+import ReturnForm from './components/ReturnForm';
 
 const ReturnOrderPage = () => {
   const params = useParams();
@@ -25,16 +23,6 @@ const ReturnOrderPage = () => {
     variables: orderId,
     enabled: Boolean(orderId),
   });
-
-  const onSubmit = (data: ReturnFormValues) => {
-    // TODO: Implement API call here
-    console.log('Return Request Data:', {
-      orderId,
-      ...data,
-    });
-    toast.success('Yêu cầu hoàn hàng đã được gửi thành công!');
-    router.push(ROUTER.ORDERS);
-  };
 
   if (isFetching) {
     return (
@@ -83,7 +71,7 @@ const ReturnOrderPage = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Form Section */}
           <div className="lg:col-span-2">
-            <ReturnForm onSubmit={onSubmit} />
+            <ReturnForm order={order} />
           </div>
 
           {/* Order Info Section */}
