@@ -1,6 +1,6 @@
 'use client';
 
-import { useCancelOrderMutation, useOrderByIdQuery } from '@/api/order/queries';
+import { useOrderByIdQuery } from '@/api/order/queries';
 import Breadcrumb from '@/components/Breadcrumb';
 import H2 from '@/components/text/H2';
 import { Button } from '@/components/ui/button';
@@ -11,12 +11,19 @@ import { cn, onMutateError } from '@/libs/common';
 import { ROUTER } from '@/libs/router';
 import { formatNumber } from '@/libs/utils';
 import { format } from 'date-fns';
-import { AlertCircle, ArrowLeft, CheckCircle, Loader2, Package, Truck, X } from 'lucide-react';
+import { AlertCircle, ArrowLeft, CheckCircle, Loader2, Package, RefreshCw, Truck, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import DialogCancelOrder from '../OrdersPage/components/DialogCancelOrder';
+import {
+  getItemStatusColor,
+  getItemStatusIcon,
+  getItemStatusText,
+  getReturnStatusColor,
+  getReturnStatusIcon,
+  getReturnStatusText,
+} from '../OrdersPage/libs/utils';
 
 const OrderDetailPage = () => {
   const params = useParams();
@@ -34,36 +41,45 @@ const OrderDetailPage = () => {
     onError: onMutateError,
   });
 
-  // Simplified status display function
   const getStatusBadge = () => {
     if (!order) return null;
 
-    // Check if order is fully completed (delivered and paid)
-    if (order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED') {
+    // Kiểm tra xem đơn hàng đã hoàn tiền chưa
+    if (order.paymentStatus === 'REFUNDED') {
       return (
-        <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-green-100 text-green-800')}>
-          <CheckCircle className="h-5 w-5" />
-          Completed
+        <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-blue-100 text-blue-800')}>
+          <RefreshCw className="h-5 w-5" />
+          Đã hoàn tiền
         </span>
       );
     }
 
-    // Status config based on shipping status
+    // Kiểm tra xem đơn hàng đã hoàn tất hay chưa (đã giao hàng và đã thanh toán)
+    if (order.shippingStatus === 'DELIVERED' && order.paymentStatus === 'COMPLETED') {
+      return (
+        <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-green-100 text-green-800')}>
+          <CheckCircle className="h-5 w-5" />
+          Hoàn tất
+        </span>
+      );
+    }
+
+    // Cấu hình trạng thái dựa trên trạng thái giao hàng
     const statusConfig = {
       PENDING: {
         color: 'bg-yellow-100 text-yellow-800',
         icon: <AlertCircle className="h-5 w-5" />,
-        text: 'Pending',
+        text: 'Chờ xử lý',
       },
       PROCESSING: {
         color: 'bg-blue-100 text-blue-800',
         icon: <Package className="h-5 w-5" />,
-        text: 'Processing',
+        text: 'Đang xử lý',
       },
       SHIPPED: {
         color: 'bg-blue-100 text-blue-800',
         icon: <Truck className="h-5 w-5" />,
-        text: 'Shipping',
+        text: 'Đang vận chuyển',
       },
       CANCELED: {
         color: 'bg-red-100 text-red-800',
@@ -72,17 +88,17 @@ const OrderDetailPage = () => {
       },
     };
 
-    // If payment failed, show that first
+    // Nếu thanh toán thất bại, hiển thị trạng thái này trước
     if (order.paymentStatus === 'FAILED') {
       return (
         <span className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', 'bg-red-100 text-red-800')}>
           <AlertCircle className="h-5 w-5" />
-          Payment Failed
+          Thanh toán thất bại
         </span>
       );
     }
 
-    // Otherwise show shipping status
+    // Nếu không, hiển thị trạng thái vận chuyển
     const config = (statusConfig as any)[order.shippingStatus] || statusConfig.PENDING;
 
     return (
@@ -93,16 +109,29 @@ const OrderDetailPage = () => {
     );
   };
 
+  const getReturnStatusBadge = () => {
+    if (!order || !order.returnStatus || order.returnStatus === 'NONE') return null;
+
+    return (
+      <span
+        className={cn('flex items-center gap-1.5 rounded-full px-3 py-1 font-medium text-sm', getReturnStatusColor(order.returnStatus))}
+      >
+        {getReturnStatusIcon(order.returnStatus)}
+        {getReturnStatusText(order.returnStatus)}
+      </span>
+    );
+  };
+
   if (error) {
     return (
       <Container className="py-16">
         <div className="text-center">
-          <h2 className="font-semibold text-gray-900 text-xl">Order not found</h2>
-          <p className="mt-2 text-gray-600">The order you're looking for doesn't exist or you don't have permission to view it.</p>
+          <h2 className="font-semibold text-gray-900 text-xl">Không tìm thấy đơn hàng</h2>
+          <p className="mt-2 text-gray-600">Đơn hàng không tồn tại hoặc bạn không có quyền truy cập.</p>
           <Link href={ROUTER.ORDERS}>
             <Button className="mt-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Orders
+              Quay lại đơn hàng
             </Button>
           </Link>
         </div>
@@ -121,7 +150,7 @@ const OrderDetailPage = () => {
       }
       return format(date, 'dd/MM/yyyy');
     } catch (error) {
-      console.error('Error formatting date:', error);
+      console.error('Lỗi khi định dạng ngày:', error);
       return 'N/A';
     }
   };
@@ -137,7 +166,7 @@ const OrderDetailPage = () => {
       }
       return format(date, 'dd/MM/yyyy HH:mm');
     } catch (error) {
-      console.error('Error formatting date time:', error);
+      console.error('Lỗi khi định dạng ngày giờ:', error);
       return 'N/A';
     }
   };
@@ -146,9 +175,9 @@ const OrderDetailPage = () => {
     <div>
       <Breadcrumb
         breadcrumbs={[
-          { name: 'Home', path: ROUTER.HOME },
-          { name: 'My Orders', path: ROUTER.ORDERS },
-          { name: order ? `Order Code: ${order.orderCode}` : 'Order Details' },
+          { name: 'Trang chủ', path: ROUTER.HOME },
+          { name: 'Đơn hàng của tôi', path: ROUTER.ORDERS },
+          { name: order ? `Mã đơn hàng: ${order.orderCode}` : 'Chi tiết đơn hàng' },
         ]}
       />
 
@@ -178,10 +207,13 @@ const OrderDetailPage = () => {
             <div className="border-gray-200 border-b p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <H2 className="mb-1">Order Code: {order?.orderCode}</H2>
+                  <H2 className="mb-1">Mã đơn hàng {order?.orderCode}</H2>
                   <p className="text-gray-500 text-sm">Đã đặt: {formatDate(order?.createdAt)}</p>
                 </div>
-                <div className="flex items-center gap-4">{getStatusBadge()}</div>
+                <div className="flex items-center gap-2">
+                  {getStatusBadge()}
+                  {getReturnStatusBadge()}
+                </div>
               </div>
             </div>
 
@@ -207,10 +239,23 @@ const OrderDetailPage = () => {
                           )}
                         </div>
                         <div className="flex flex-1 flex-col">
-                          <h4 className="font-medium text-gray-900 text-sm">{item.productName}</h4>
-                          {item.variantId && <p className="mt-1 text-gray-500 text-xs">Variant: {item.variantId}</p>}
+                          <div className="flex items-start justify-between">
+                            <h4 className="font-medium text-gray-900 text-sm">{item.productName}</h4>
+                            {item.itemStatus && item.itemStatus !== 'NORMAL' && (
+                              <span
+                                className={cn(
+                                  'flex items-center gap-1 rounded-full px-2 py-0.5 text-xs',
+                                  getItemStatusColor(item.itemStatus)
+                                )}
+                              >
+                                {getItemStatusIcon(item.itemStatus)}
+                                {getItemStatusText(item.itemStatus)}
+                              </span>
+                            )}
+                          </div>
+                          {item.variantId && <p className="mt-1 text-gray-500 text-xs">Phân loại {item.variantId}</p>}
                           <div className="mt-auto flex items-end justify-between">
-                            <p className="text-gray-500 text-sm">Qty: {item.quantity}</p>
+                            <p className="text-gray-500 text-sm">Số lượng {item.quantity}</p>
                             <p className="font-medium text-gray-900 text-sm">{formatNumber(item.price * item.quantity)} vnđ</p>
                           </div>
                         </div>
@@ -241,6 +286,91 @@ const OrderDetailPage = () => {
                       </HStack>
                     </div>
                   </div>
+
+                  {/* Return Request Details */}
+                  {order?.returnRequest && (
+                    <div className="mt-6 rounded-lg border border-orange-200 bg-orange-50 p-4">
+                      <h3 className="mb-4 font-medium text-lg text-orange-900">Thông tin yêu cầu hoàn trả</h3>
+                      <div className="space-y-3">
+                        <HStack className="justify-between">
+                          <span className="text-gray-700 text-sm">Loại yêu cầu:</span>
+                          <span className="font-medium text-sm">
+                            {order.returnRequest.type === 'RETURN' ? 'Trả hàng hoàn tiền' : 'Đổi hàng'}
+                          </span>
+                        </HStack>
+                        <HStack className="justify-between">
+                          <span className="text-gray-700 text-sm">Lý do:</span>
+                          <span className="font-medium text-sm">{order.returnRequest.reason}</span>
+                        </HStack>
+                        {order.returnRequest.description && (
+                          <div>
+                            <span className="text-gray-700 text-sm">Mô tả:</span>
+                            <p className="mt-1 text-sm">{order.returnRequest.description}</p>
+                          </div>
+                        )}
+                        <HStack className="justify-between">
+                          <span className="text-gray-700 text-sm">Trạng thái:</span>
+                          <span
+                            className={cn(
+                              'rounded-full px-2 py-1 font-medium text-xs',
+                              order.returnRequest.status === 'APPROVED'
+                                ? 'bg-green-100 text-green-800'
+                                : order.returnRequest.status === 'REJECTED'
+                                  ? 'bg-red-100 text-red-800'
+                                  : order.returnRequest.status === 'COMPLETED'
+                                    ? 'bg-blue-100 text-blue-800'
+                                    : 'bg-yellow-100 text-yellow-800'
+                            )}
+                          >
+                            {order.returnRequest.status === 'PENDING'
+                              ? 'Đang chờ xử lý'
+                              : order.returnRequest.status === 'APPROVED'
+                                ? 'Đã chấp nhận'
+                                : order.returnRequest.status === 'REJECTED'
+                                  ? 'Đã từ chối'
+                                  : 'Đã hoàn tất'}
+                          </span>
+                        </HStack>
+                        {order.returnRequest.refundInfo && (
+                          <>
+                            <Separator className="my-2" />
+                            <div>
+                              <h4 className="mb-2 font-medium text-gray-700 text-sm">Thông tin hoàn tiền:</h4>
+                              <div className="space-y-2">
+                                <HStack className="justify-between">
+                                  <span className="text-gray-600 text-xs">Ngân hàng:</span>
+                                  <span className="text-sm">{order.returnRequest.refundInfo.bankName}</span>
+                                </HStack>
+                                <HStack className="justify-between">
+                                  <span className="text-gray-600 text-xs">Số tài khoản:</span>
+                                  <span className="text-sm">{order.returnRequest.refundInfo.bankAccount}</span>
+                                </HStack>
+                                <HStack className="justify-between">
+                                  <span className="text-gray-600 text-xs">Chủ tài khoản:</span>
+                                  <span className="text-sm">{order.returnRequest.refundInfo.bankAccountName}</span>
+                                </HStack>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                        {order.returnRequest.exchangeOrderId && (
+                          <HStack className="justify-between">
+                            <span className="text-gray-700 text-sm">Mã đơn đổi hàng:</span>
+                            <Link
+                              href={`${ROUTER.ORDERS}/${order.returnRequest.exchangeOrderId}`}
+                              className="font-medium text-primary text-sm hover:underline"
+                            >
+                              Xem đơn hàng
+                            </Link>
+                          </HStack>
+                        )}
+                        <HStack className="justify-between">
+                          <span className="text-gray-700 text-sm">Ngày yêu cầu:</span>
+                          <span className="text-sm">{formatDateTime(order.returnRequest.createdAt)}</span>
+                        </HStack>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Shipping and payment info */}
@@ -283,7 +413,7 @@ const OrderDetailPage = () => {
                         <div className="mt-2 rounded-md bg-red-50 p-2">
                           <p className="flex items-center font-medium text-red-600 text-sm">
                             <X className="mr-2 h-4 w-4" />
-                            Payment Failed
+                            Thanh toán thất bạibại
                           </p>
                         </div>
                       ) : (

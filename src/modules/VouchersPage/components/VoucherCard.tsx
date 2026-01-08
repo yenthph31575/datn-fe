@@ -18,16 +18,16 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
   const { setDiscount } = useCheckoutStore();
   const router = useRouter();
 
-  // Check if voucher is active
+  // kiểm tra voucher có hoạt động không
   const isActive = voucher.isActive && voucher.status === 'ACTIVE';
 
-  // Check if voucher is expired
+  // kiểm tra voucher đã hết hạn chưa
   const isExpired = voucher.status === 'EXPIRED' || isBefore(new Date(voucher.endDate), new Date());
 
-  // Check if voucher is not yet started
+  // kiểm tra voucher chưa bắt đầu
   const isNotStarted = isAfter(new Date(voucher.startDate), new Date());
 
-  // Get status text and color
+  // Lấy thông tin trạng thái và màu sắc
   const getStatusInfo = () => {
     if (isExpired) {
       return { text: 'Hết hạn', color: 'bg-red-100 text-red-800' };
@@ -43,7 +43,7 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
 
   const statusInfo = getStatusInfo();
 
-  // Format discount value
+  // Định dạng giá trị giảm giá
   const formatDiscountValue = () => {
     if (voucher.type === 'PERCENTAGE') {
       return `${voucher.value}%`;
@@ -51,7 +51,7 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
     return formatNumber(voucher.value);
   };
 
-  // Copy voucher code to clipboard
+  // sao chép mã voucher
   const handleCopyCode = () => {
     navigator.clipboard.writeText(voucher.code);
     setCopied(true);
@@ -61,7 +61,7 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
 
   return (
     <div className="relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md">
-      {/* Voucher header with tear effect */}
+      {/* phần header voucher với hiệu ứng xé vé  */}
       <div className="relative bg-primary-500 p-4 text-white">
         <div className="flex items-center justify-between">
           <h3 className="font-bold text-lg">{voucher.name}</h3>
@@ -69,7 +69,7 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
         </div>
         <p className="mt-1 text-sm opacity-90">{voucher.description}</p>
 
-        {/* Tear effect */}
+        {/* Hiệu ứng xé vé*/}
         <div className="absolute right-0 bottom-0 left-0 h-4 overflow-hidden">
           <div className="flex w-full">
             {Array.from({ length: 20 }).map((_, i) => (
@@ -79,7 +79,7 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
         </div>
       </div>
 
-      {/* Voucher content */}
+      {/* nội dung voucher */}
       <div className="flex flex-1 flex-col p-4">
         <div className="mb-4 flex items-center justify-between">
           <div>
@@ -112,7 +112,7 @@ const VoucherCard = ({ voucher }: VoucherCardProps) => {
           </div>
         </div>
 
-        {/* Voucher code */}
+        {/* Mã voucher*/}
         <div className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2">
           <code className="font-bold font-mono text-primary-700">{voucher.code}</code>
           <Button variant="ghost" size="sm" onClick={handleCopyCode}>

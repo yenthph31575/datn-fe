@@ -37,7 +37,7 @@ const Header = () => {
     >
       <HStack className="mx-auto max-w-[1440px]" pos="apart" spacing={isMobile ? 20 : 48}>
         <Link href={ROUTER.HOME}>
-          <Image src="/images/logo.png" alt="logo" width={150} height={92} className="h-auto w-[95px]" />
+          <Image src="/images/logo.png" alt="logo" width={150} height={92} className="h-auto w-[95px]" priority />
         </Link>
 
         <HStack className="flex-1">

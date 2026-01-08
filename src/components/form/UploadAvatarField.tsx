@@ -74,9 +74,9 @@ const UploadAvatarField = <T extends FieldValues>({
               }}
               onSizeError={(type: string) => {
                 if (type === 'File size is too small') {
-                  toast.error('Cannot upload files smaller than 1KB !');
+                  toast.error('Không thể tải file nhỏ hơn 1KB!');
                 } else {
-                  toast.error('Avatar size must be less than ' + (props.maxSize ?? 25) + 'MB !');
+                  toast.error('Kích thước ảnh đại diện phải nhỏ hơn ' + (props.maxSize ?? 25) + 'MB!');
                 }
               }}
               onTypeError={(error: string) => {

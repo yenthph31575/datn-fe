@@ -27,7 +27,7 @@ const FavoritesPage = () => {
   console.log(data?.items);
   return (
     <div>
-      <Breadcrumb breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'My Favorites' }]} />
+      <Breadcrumb breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Sản phẩm yêu thích' }]} />
 
       <Container className="py-8">
         <H2 className="mb-6">Sản phẩm yêu thích</H2>
