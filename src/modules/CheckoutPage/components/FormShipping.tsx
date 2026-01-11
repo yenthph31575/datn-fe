@@ -199,8 +199,9 @@ const FormShipping = () => {
               ?.map((address) => (
                 <div
                   key={address._id}
-                  className={`relative rounded-md border p-3 transition-all ${selectedAddressId === address._id ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
-                    }`}
+                  className={`relative rounded-md border p-3 transition-all ${
+                    selectedAddressId === address._id ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+                  }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-3">
