@@ -97,7 +97,7 @@ const ProductItem = ({
           <div className="absolute top-2 right-2 flex items-center bg-[#ffe97a] text-[#ec3814]">
             <Icons.lightning className="mr-1" /> -{formatNumber(((_originalPrice - Number(currentPrice || 0)) / _originalPrice) * 100)} %
           </div>
-          <div className="absolute top-2 left-2 rounded bg-primary-500 px-2 py-1 text-white">New</div>
+          <div className="absolute top-2 left-2 rounded bg-primary-500 px-2 py-1 text-white">Mới</div>
         </div>
       </VStack>
     </Link>
