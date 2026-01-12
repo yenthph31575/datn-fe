@@ -43,14 +43,14 @@ const CheckoutPage = () => {
     },
   });
   const { items, clearCheckout } = useCheckoutStore();
-  const { removeMultipleFromCart } = useCartStore(); // Import removeMultipleFromCart from CartStore
+  const { removeMultipleFromCart } = useCartStore(); // Lấy hàm removeMultipleFromCart từ CartStore
 
   const { mutate: createOrder, isLoading } = useCreateOrderMutation({
     onSuccess: (data) => {
-      // Get the IDs of items that were successfully ordered
+      // Lấy danh sách ID của các sản phẩm đã đặt hàng thành công
       const orderedItemIds = items.map((item) => item._id).filter(Boolean);
 
-      // Remove these items from the cart
+      // Xóa những sản phẩm khỏi giỏ hàng
       if (orderedItemIds.length > 0) {
         removeMultipleFromCart(orderedItemIds);
       }
@@ -103,7 +103,7 @@ const CheckoutPage = () => {
   return (
     <div className="bg-[#F5F5F5] pb-10">
       <Breadcrumb
-        breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'Cart', path: ROUTER.CART }, { name: 'Checkout' }]}
+        breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Giỏ hàng', path: ROUTER.CART }, { name: 'Thanh toán' }]}
         className="bg-white"
       />
 
@@ -158,7 +158,7 @@ const CheckoutPage = () => {
               </div>
             </div>
 
-            {/* Right column - Order Summary */}
+            {/* tóm tắt đơn hàng */}
             <div className="col-span-1">
               <div className="sticky top-6 rounded bg-white p-6">
                 <h4 className="mb-4 font-medium text-lg">Tóm tắt đơn hàng</h4>

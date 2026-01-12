@@ -51,7 +51,7 @@ export const handleError = async (error: AxiosError): Promise<void> => {
 
     const token = await refreshTokenPromise;
     if (!token) {
-      toast.error('Your session is expired, please try to login again');
+      toast.error('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại');
       return Promise.reject();
     }
     isRefreshPending = false;
@@ -69,6 +69,8 @@ request.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   const accessToken = getCookie('access_token');
 
   if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+  config.headers['ngrok-skip-browser-warning'] = true;
+
   return config;
 });
 

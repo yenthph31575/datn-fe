@@ -22,7 +22,7 @@ const ProductDetailPage = async ({ params }: Props) => {
   return (
     <div>
       <Breadcrumb
-        breadcrumbs={[{ name: 'Home', path: ROUTER.HOME }, { name: 'Product', path: ROUTER.COLLECTIONS }, { name: data?.name }]}
+        breadcrumbs={[{ name: 'Trang chủ', path: ROUTER.HOME }, { name: 'Sản phẩm', path: ROUTER.COLLECTIONS }, { name: data?.name }]}
       />
 
       <Container className="mt-10">

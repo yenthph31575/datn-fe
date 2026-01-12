@@ -88,7 +88,7 @@ const ResetPasswordPage = () => {
         <Image width={150} height={92} src="/images/logo.png" alt="logo" className="h-auto w-[14rem]" />
       </HStack>
       <VStack className="w-full max-w-[450px] rounded-lg border border-grey-100 px-6 py-6 shadow-card-2 md:px-8" spacing={16}>
-        <h1 className="mb-4 text-center font-semibold text-2xl md:text-3xl">Reset Password</h1>
+        <h1 className="mb-4 text-center font-semibold text-2xl md:text-3xl">Đặt lại mật khẩu</h1>
 
         {!resetComplete ? (
           <>
@@ -102,7 +102,7 @@ const ResetPasswordPage = () => {
                   control={form.control}
                   name="newPassword"
                   label="Mật khẩu mới"
-                  placeholder="Mời nhập new password"
+                  placeholder="Mời nhập mật khẩu mới"
                   type="password"
                 />
                 <TextField
@@ -111,7 +111,7 @@ const ResetPasswordPage = () => {
                   control={form.control}
                   name="confirmPassword"
                   label="Xác nhận mật khẩu mới"
-                  placeholder="Confirm your new password"
+                  placeholder="Mời nhập lại mật khẩu mới"
                   type="password"
                 />
               </VStack>

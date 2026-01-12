@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Logo and About */}
           <div>
             <Link href={ROUTER.HOME}>
-              <Image src="/images/logo.png" alt="logo" width={150} height={92} />
+              <Image src="/images/logo.png" alt="logo" width={150} height={92} priority />
             </Link>
             <p className="mt-4 text-gray-600 text-sm">Nền tảng mua sắm trực tuyến uy tín với sản phẩm chất lượng và dịch vụ tận tâm.</p>
             <HStack className="mt-6" spacing={16}>

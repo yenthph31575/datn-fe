@@ -21,7 +21,7 @@ const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([
-    { id: '1', content: 'Xin chào đến với kiddie kingdom shop, bạn cần giúp đỡ gì?', isUser: false },
+    { id: '1', content: 'Xin chào đến với Kiddie Kingdom shop, bạn cần giúp đỡ gì?', isUser: false },
   ]);
   const [chatHistory, setChatHistory] = useState<string[]>([]);
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
