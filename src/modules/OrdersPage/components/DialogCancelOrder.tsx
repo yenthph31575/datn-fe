@@ -40,7 +40,7 @@ const DialogCancelOrder = ({ orderId, refetch }: DialogCancelOrderProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Hủy Đơn Hàng</DialogTitle>
+          <DialogTitle>Hủy đơn hàng</DialogTitle>
           <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
             <X className="h-4 w-4" />
           </button>
