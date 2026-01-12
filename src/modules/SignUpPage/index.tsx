@@ -59,8 +59,14 @@ const LoginPage = () => {
 
         <FormWrapper form={form} onSubmit={handleSubmit}>
           <VStack spacing={16}>
-
-            <TextField required fullWidth control={form.control} name="username" label="Tên đăng nhập" placeholder="Mời nhập tên đăng nhập" />
+            <TextField
+              required
+              fullWidth
+              control={form.control}
+              name="username"
+              label="Tên đăng nhập"
+              placeholder="Mời nhập tên đăng nhập"
+            />
 
             <TextField required fullWidth control={form.control} name="email" label="Email" placeholder="Mời nhập email" />
             <TextField

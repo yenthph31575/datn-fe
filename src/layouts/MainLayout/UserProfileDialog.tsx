@@ -103,7 +103,14 @@ const UserProfileDialog = () => {
                     <UploadAvatarField control={form.control} name="avatar" />
                   </HStack>
 
-                  <TextField required fullWidth control={form.control} name="username" label="Tên đăng nhập" placeholder="Mời nhập tên đăng nhập" />
+                  <TextField
+                    required
+                    fullWidth
+                    control={form.control}
+                    name="username"
+                    label="Tên đăng nhập"
+                    placeholder="Mời nhập tên đăng nhập"
+                  />
 
                   <TextField
                     required

@@ -2,7 +2,6 @@ import { validationMessages } from '@/libs/validation.utility';
 import { z } from 'zod';
 
 export const authSchema = z.object({
-
   email: z.string({ required_error: 'Email không được để trống. ' }).email().nonempty(validationMessages.required('Email')),
   password: z
     .string({ required_error: 'Mật khẩu không được để trống.' })
@@ -27,8 +26,6 @@ export const signUpSchema = z.object({
     .max(100)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
       message: 'Tên đăng nhập hoặc mật khẩu không đúng!',
-
-
     }),
 });
 

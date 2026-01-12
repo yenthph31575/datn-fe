@@ -26,7 +26,7 @@ const OrdersPage = () => {
   const [limit, setLimit] = useState(5);
 
   // Convert tab to API status filters
-  const getStatusFilters = (): { shippingStatus?: OrderStatus; paymentStatus?: PaymentStatus, isReturn?: boolean } => {
+  const getStatusFilters = (): { shippingStatus?: OrderStatus; paymentStatus?: PaymentStatus; isReturn?: boolean } => {
     switch (activeTab) {
       // Main status tabs
       case 'pending':
