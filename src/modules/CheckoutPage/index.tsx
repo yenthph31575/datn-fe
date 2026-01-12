@@ -88,7 +88,7 @@ const CheckoutPage = () => {
 
       // Hiển thị thông báo lỗi
       const firstError = validationResult.error.errors[0];
-      toast.error(firstError?.message || 'Vui lòng kiểm tra thông tin đơn hàng của bạn');
+      toast.error(firstError?.message || 'Kiểm tra lại thông tin đơn hàng của bạn');
       return;
     }
 
